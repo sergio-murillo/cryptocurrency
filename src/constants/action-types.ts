@@ -24,3 +24,7 @@ export enum ExchangeActionTypes {
   FETCH_EXCHANGE_FOR_COIN = '@@exchange/FETCH_EXCHANGE_FOR_COIN',
   FETCH_EXCHANGE_FOR_COIN_ERROR = '@@exchange/FETCH_EXCHANGE_FOR_COIN_ERROR'
 }
+
+export enum UIActionTypes {
+  SET_IS_LOADING = '@@ui/SET_IS_LOADING',
+}
