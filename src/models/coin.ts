@@ -12,6 +12,11 @@ export interface GlobalCryptoDataResponse {
   mcap_ath: number;
 }
 
+export interface AllCoinsRequest {
+  start: number;
+  limit: number;
+}
+
 export interface AllCoinsResponse {
   data: Ticker[];
   info: {

@@ -7,7 +7,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import { History } from 'history';
 import { Global, ThemeProvider } from '@emotion/react';
 import customTheme from '../themes/default';
-import { globalStyles } from '../styles/commons';
+import { globalStyles } from '@styles/commons';
 
 interface MainProps {
   store: Store<any>;

@@ -1,1 +1,0 @@
-export { fetchGlobalCryptoSaga } from './coin';

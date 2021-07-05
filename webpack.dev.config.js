@@ -9,7 +9,7 @@ module.exports = {
     'babel-polyfill',
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
-    './src/index.jsx'
+    './src/index.tsx'
   ],
   output: {
     path: BUILD_DIR,
@@ -20,7 +20,19 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin()
   ],
   resolve: {
-    extensions: ['', '.js', '.tsx']
+    alias: {
+      "@src": path.join(__dirname, 'src'),
+      "@components": path.join(__dirname, 'src/components'),
+      "@constants": path.join(__dirname, 'src/constants'),
+      "@containers": path.join(__dirname, 'src/containers'),
+      "@helpers": path.join(__dirname, 'src/helpers'),
+      "@services": path.join(__dirname, 'src/services'),
+      "@models": path.join(__dirname, 'src/models'),
+      "@store": path.join(__dirname, 'src/store'),
+      "@utils": path.join(__dirname, 'src/utils'),
+      "@styles": path.join(__dirname, 'src/styles')
+    },
+    extensions: ['', '.js', '.ts', '.tsx', '.jsx']
   },
   module: {
     loaders: [

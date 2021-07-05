@@ -1,4 +1,8 @@
-export type { GlobalCryptoDataResponse, AllCoinsResponse, Ticker } from './coin';
+export type {
+    GlobalCryptoDataResponse,
+    AllCoinsResponse,
+    AllCoinsRequest,
+    Ticker } from './coin';
 
 export type { MarketResponse } from './market';
 
