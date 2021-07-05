@@ -1,0 +1,1 @@
+export { fetchGlobalCryptoSaga } from './fetchGlobalCryptoData';
