@@ -2,7 +2,7 @@ import {
   AllCoinsResponse,
   CryptoCurrencyActionTypes,
   GlobalCryptoDataResponse,
-  Ticker } from '../types/types';
+  Ticker } from '../models/coin';
 
 export interface CryptoCurrencyState {
   globalCryptoData: GlobalCryptoDataResponse[];

@@ -1,1 +1,1 @@
-export { fetchGlobalCryptoSaga } from './fetchGlobalCryptoData';
+export { fetchGlobalCryptoSaga } from './coin';

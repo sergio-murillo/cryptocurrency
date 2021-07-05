@@ -4,7 +4,7 @@ import CoinList from '../components/Coin/CoinList';
 import MarketOverview from '../components/Market/MarketOverview';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../reducers';
-import { GlobalCryptoDataResponse } from '../types/types';
+import { GlobalCryptoDataResponse } from '../models/coin';
 import { fetchGlobalCryptoActions } from '../actions';
 import { flex, mq } from '../styles/commons';
 

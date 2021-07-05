@@ -38,21 +38,3 @@ export interface Ticker {
   tsupply: string;
   msupply: string;
 }
-
-export interface Market {
-  name: string;
-  base: string;
-  quote: string;
-  price: number;
-  price_usd: number;
-  volume: number;
-  volume_usd: number;
-  time: number;
-}
-
-export enum CryptoCurrencyActionTypes {
-  CALL_COINLORE_API = '@@crypto-currency/CALL_COINLORE_API',
-  REQUEST_GLOBAL_CRYPTO = '@@crypto-currency/RECEIVE_GLOBAL_CRYPTO',
-  FETCH_GLOBAL_CRYPTO = '@@crypto-currency/FETCH_GLOBAL_CRYPTO',
-  FETCH_GLOBAL_CRYPTO_ERROR = '@@crypto-currency/FETCH_GLOBAL_CRYPTO_ERROR'
-}

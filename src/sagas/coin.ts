@@ -1,10 +1,10 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
-import { CryptoCurrencyActionTypes } from '../types/types';
+import { CryptoCurrencyActionTypes } from '../models/coin';
 import { fetchGlobalCryptoData } from '../services';
 
 import {
   fetchGlobalCryptoActions,
-} from './../actions';
+} from '../actions';
 
 function* requestGlobalCrypto() {
   try {

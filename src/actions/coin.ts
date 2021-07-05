@@ -1,8 +1,21 @@
 import { createAction } from '../helpers/action';
-import { CryptoCurrencyActionTypes } from '../types/types';
+import { CoinActionTypes } from '../constants/action-types';
+import { GlobalCryptoDataResponse } from '../models';
 
 export const fetchGlobalCryptoActions = createAction(
-  CryptoCurrencyActionTypes.REQUEST_GLOBAL_CRYPTO,
-  CryptoCurrencyActionTypes.FETCH_GLOBAL_CRYPTO,
-  CryptoCurrencyActionTypes.FETCH_GLOBAL_CRYPTO_ERROR
-)<undefined, any[], any>();
+  CoinActionTypes.REQUEST_GLOBAL_CRYPTO,
+  CoinActionTypes.FETCH_GLOBAL_CRYPTO,
+  CoinActionTypes.FETCH_GLOBAL_CRYPTO_ERROR
+)<undefined, GlobalCryptoDataResponse[], any>();
+
+export const fetchAllCoinsActions = createAction(
+  CoinActionTypes.REQUEST_ALL_COINS,
+  CoinActionTypes.FETCH_ALL_COINS,
+  CoinActionTypes.FETCH_ALL_COINS_ERROR
+)<undefined, GlobalCryptoDataResponse[], any>();
+
+export const fetchSpecificCoinActions = createAction(
+  CoinActionTypes.REQUEST_SPECIFIC_COIN,
+  CoinActionTypes.FETCH_SPECIFIC_COIN,
+  CoinActionTypes.FETCH_SPECIFIC_COIN_ERROR
+)<undefined, GlobalCryptoDataResponse[], any>();
