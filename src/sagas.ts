@@ -1,4 +1,4 @@
-export { globalCryptoSaga, allCoinsSaga } from './store/coin/sagas';
+export { globalCryptoSaga, allCoinsSaga, specificCoinSaga } from './store/coin/sagas';
 
 export { marketForCoinSaga } from './store/market/sagas';
 

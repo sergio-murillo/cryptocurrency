@@ -14,6 +14,7 @@ const initialState: ApplicationState = {
         time: 0
       }
     },
+    coinsFiltered: [],
     currentCoin: [],
     ui: {
       isLoadingCoins: false,
@@ -26,10 +27,17 @@ const initialState: ApplicationState = {
       data: [],
       total_counts: 0
     },
+    exchangesFiltered: [],
+    ui: {
+      isLoadingExchanges: false,
+    },
     errors: {} as any
   },
   market: {
     market: [],
+    ui: {
+      isLoadingMarket: false,
+    },
     errors: {} as any
   },
   ui: {

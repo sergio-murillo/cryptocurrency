@@ -7,3 +7,10 @@ export const fetchMarketForCoinActions = createAction(
   MarketActionTypes.FETCH_MARKET_FOR_COIN,
   MarketActionTypes.FETCH_MARKET_FOR_COIN_ERROR
 )<number, MarketResponse[], any>();
+
+export const setIsLoadingMarket = (value: boolean) => (
+  { 
+    type: MarketActionTypes.IS_LOADING_MARKET,
+    response: value
+  }
+);

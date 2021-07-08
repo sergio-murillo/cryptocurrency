@@ -7,7 +7,6 @@ export const MarketOverviewItems = styled.div`
 
 export const MarketOverviewItem = styled.div`
   ${flex('stretch', 'row', 'space-between')}
-  font-weight: 600;
   width: 100%;
   margin-bottom: 30px;
   &:last-of-type {
@@ -18,6 +17,7 @@ export const MarketOverviewItem = styled.div`
 export const MarketName = styled.div`
   display: flex;
   align-items: center;
+  font-weight: 600;
 `;
 
 export const MarketValue = styled.div``;

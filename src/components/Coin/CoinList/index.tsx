@@ -4,34 +4,25 @@ import Filter from 'src/components/List/Filter';
 import PanelContainer from 'src/components/Commons/Panel';
 import PercentageValue from 'src/components/Commons/PercentageValue';
 import { CoinImage, CoinListContainer, TableContainer } from './styles';
-import { AllCoinsRequest, AllCoinsResponse, Ticker, Ui } from 'src/models';
+import { AllCoinsRequest, AllCoinsResponse, Ticker, UiCoin } from 'src/models';
 import { buildImageUrl } from 'src/helpers';
 import { formatUSD } from 'src/utils';
 import { connect } from 'react-redux';
-import { fetchAllCoinsActions, setIsLoadingCoins } from 'src/store/coin/actions';
+import { fetchAllCoinsActions, setCoinsFiltered, setIsLoadingCoins } from 'src/store/coin/actions';
 import { LIMIT_PER_PAGE } from 'src/constants/commons';
 import { ApplicationState } from 'src/reducers';
 import { normalizeText } from 'src/utils/common';
-
-interface Header {
-  title: string;
-  colspan?: number;
-}
-
-interface Table {
-  headers: Header[];
-  items: any[];
-  isLoading: boolean;
-}
+import { Table } from 'src/models/commons';
 
 interface propsFromState {
   coins: AllCoinsResponse;
-  ui: Ui;
+  coinsFiltered: Ticker[];
+  ui: UiCoin;
 }
 
 interface propsFromDispatch {
   fetchAllCoins: (request: AllCoinsRequest) => any;
-  setCoins: (coins: AllCoinsResponse) => any;
+  setCoins: (coins: Ticker[]) => any;
 }
 
 type Props = propsFromState & propsFromDispatch;
@@ -44,7 +35,7 @@ let coinList: Table = {
   isLoading: true,
 };
 
-const CointList: React.FC<Props> = ({ coins, ui, fetchAllCoins, setCoins }) => {
+const CointList: React.FC<Props> = ({ coinsFiltered, coins, ui, fetchAllCoins, setCoins }) => {
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -52,10 +43,10 @@ const CointList: React.FC<Props> = ({ coins, ui, fetchAllCoins, setCoins }) => {
     fetchAllCoins({ start: 1, limit: LIMIT_PER_PAGE });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
+
   coinList = {
     ...coinList,
-    items: getCoinItems(coins.data),
+    items: getCoinItems(coinsFiltered),
     isLoading: ui.isLoadingCoins
   };
 
@@ -67,7 +58,7 @@ const CointList: React.FC<Props> = ({ coins, ui, fetchAllCoins, setCoins }) => {
   const filterTextPerPage = (text: string) => {
     const coinsFiltered = coins.data.filter(({ name }) => normalizeText(name).includes(normalizeText(text)));
 
-    setCoins({...coins, data: coinsFiltered });
+    setCoins(coinsFiltered);
   };
 
   const filterPricePerPage = ({ firstFilter, secondFilter }) => {
@@ -85,7 +76,7 @@ const CointList: React.FC<Props> = ({ coins, ui, fetchAllCoins, setCoins }) => {
 
     const coinsFiltered = coins.data.filter(({ price_usd }) => filterCondition(+price_usd));
 
-    setCoins({...coins, data: coinsFiltered });
+    setCoins(coinsFiltered);
   };
 
   return (
@@ -109,7 +100,7 @@ const getCoinItems = (coins: Ticker[]) => (
   coins.map(coin => [
     coin.rank,
     <CoinImage src={buildImageUrl(coin.name.toLocaleLowerCase())} alt={coin.name}/>,
-    coin.name,
+    `${coin.name} (${coin.symbol})`,
     formatUSD(+coin.price_usd),
     <PercentageValue value={+coin.percent_change_1h}/>,
     <PercentageValue value={+coin.percent_change_24h}/>,
@@ -119,9 +110,10 @@ const getCoinItems = (coins: Ticker[]) => (
   ])
 );
 
-const mapStateToProps = ({ coin: { coins, ui } }: ApplicationState) => ({
+const mapStateToProps = ({ coin: { coins, ui, coinsFiltered } }: ApplicationState) => ({
   coins,
   ui,
+  coinsFiltered,
 });
 
 const mapDispatchToProps = (dispatch) => {
@@ -130,8 +122,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(fetchAllCoinsActions.request(request));
       dispatch(setIsLoadingCoins(true));
     },
-    setCoins: (coins: AllCoinsResponse) => {
-      dispatch(fetchAllCoinsActions.success(coins));
+    setCoins: (coins: Ticker[]) => {
+      dispatch(setCoinsFiltered(coins));
     }
   };
 };

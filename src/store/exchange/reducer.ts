@@ -3,16 +3,23 @@ import { ExchangeActionTypes } from 'src/constants/action-types';
 import {
   AllExchangeResponse,
   ExchangeResponse } from 'src/models';
+import { ExchangePair, UiExchange } from 'src/models/exchange';
 
 export interface ExchangeState {
   exchanges: AllExchangeResponse;
   currentExchange: ExchangeResponse;
+  exchangesFiltered: ExchangePair[];
+  ui: UiExchange;
   errors: any;
 }
 
 const initialState: ExchangeState = {
   exchanges: {} as AllExchangeResponse,
   currentExchange: {} as ExchangeResponse,
+  exchangesFiltered: [],
+  ui: {
+    isLoadingExchanges: false
+  },
   errors: {} as any
 };
 
@@ -47,6 +54,22 @@ const exchangeReducer: Reducer<ExchangeState> = (state = initialState, action) =
         ...state,
         errors: {
           currentExchange: error,
+        }
+      };
+    }
+    case ExchangeActionTypes.SET_EXCHANGES_FILTERED: {
+      const { response } = action;
+      return {
+        ...state,
+        exchangesFiltered: response
+      };
+    }
+    case ExchangeActionTypes.IS_LOADING_EXCHANGES: {
+      const { response } = action;
+      return {
+        ...state,
+        ui: {
+          isLoadingExchanges: response
         }
       };
     }

@@ -1,19 +1,95 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 import PanelContainer from 'src/components/Commons/Panel';
-import Table from 'src/components/List/Table';
+import Paginator from 'src/components/List/Paginator';
+import TableContainer from 'src/components/List/Table';
+import { EXCHANGES_LIMIT_PER_PAGE } from 'src/constants/commons';
+import { Table } from 'src/models/commons';
+import { ExchangeForCoinRequest, ExchangePair, ExchangeResponse, UiExchange } from 'src/models/exchange';
+import { ApplicationState } from 'src/reducers';
+import { fetchExchangeForCoinActions, setIsLoadingExchanges } from 'src/store/exchange/actions';
+import { formatUSD } from 'src/utils';
 
-const exchangeList = {
-    headers: [{ title: 'Exchange' }, { title: 'Pair' }, { title: '24h Volume' }, { title: 'Price (USD)' }],
-    items: []
+interface propsFromComponent {
+  coinId: number;
+}
+
+interface PropsFromState {
+  currentExchange: ExchangeResponse;
+  ui: UiExchange;
+}
+
+interface PropsFromDispatch {
+  fetchExchangeForCoin: (request: ExchangeForCoinRequest, total?: number) => any;
+}
+
+type Props = propsFromComponent & PropsFromState & PropsFromDispatch;
+
+let exchangeList: Table = {
+    headers: [{ title: 'Base' }, { title: 'Quote' }, { title: 'Price (USD)' }],
+    items: [],
+    isLoading: false,
   };
 
+const ExchangeList: React.FC<Props> = ({ coinId, currentExchange, ui, fetchExchangeForCoin }) => {
 
-const Exchange: React.FC = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    fetchExchangeForCoin({ id: coinId, start: 1, limit: EXCHANGES_LIMIT_PER_PAGE });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  
+  exchangeList = {
+    ...exchangeList,
+    items: getExchangeItems(currentExchange.data),
+    isLoading: ui.isLoadingExchanges
+  };
+
+  const requestExchanges = (page: number) => {
+    fetchExchangeForCoin({
+      id: coinId,
+      start: (page - 1) * EXCHANGES_LIMIT_PER_PAGE,
+      limit: EXCHANGES_LIMIT_PER_PAGE 
+    }, currentExchange.total_counts);
+    setCurrentPage(page);
+  };
+
   return (
-    <PanelContainer>
-        <Table {...exchangeList} totalColumns={4}></Table>
+    <PanelContainer title="Cambio a USD">
+        <TableContainer
+          {...exchangeList}
+          totalColumns={exchangeList.headers.length}></TableContainer>
+        <Paginator
+          totalCount={currentExchange.total_counts}
+          currentPage={currentPage}
+          pageSize={EXCHANGES_LIMIT_PER_PAGE}
+          onPageChange={page => requestExchanges(+page)}></Paginator>
     </PanelContainer>
   );
 };
 
-export default Exchange;
+const getExchangeItems = (exchanges: ExchangePair[]) => (
+  exchanges.map(exchange => [
+    exchange.base,
+    exchange.quote,
+    formatUSD(exchange.price_usd),
+  ])
+);
+
+const mapStateToProps = ({  exchange: { currentExchange, ui }}: ApplicationState) => ({
+  currentExchange,
+  ui,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchExchangeForCoin: (request: ExchangeForCoinRequest, total = 0) => {
+      dispatch(fetchExchangeForCoinActions.success({ data: [], total_counts: total }));
+      dispatch(fetchExchangeForCoinActions.request(request));
+      dispatch(setIsLoadingExchanges(true));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExchangeList);

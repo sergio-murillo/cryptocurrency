@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import Table from 'src/components/List/Table';
+import Image from 'src/components/Commons/Image';
 
 export const CoinListContainer = styled.div``;
 
@@ -11,7 +12,7 @@ export const TableContainer = styled(Table)`
   }
 `;
 
-export const CoinImage = styled.img`
+export const CoinImage = styled(Image)`
   width: 25px;
   height: 25px;
 `;

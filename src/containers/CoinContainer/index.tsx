@@ -30,7 +30,7 @@ const Coin: React.FC<AllProps> = ({ globalCryptoData, fetchGlobalCrypto }) => {
         <CoinList/>
       </CoinListContainer>
       <CoinMarketContainer>
-        <MarketOverview/>
+        <MarketOverview globalData={globalCryptoData[0] || {}}/>
       </CoinMarketContainer>
     </CoinContainer>
     

@@ -39,3 +39,7 @@ export interface ExchangeForCoinRequest {
   start: number;
   limit: number;
 }
+
+export interface UiExchange {
+  isLoadingExchanges: boolean;
+}

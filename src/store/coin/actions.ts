@@ -30,3 +30,10 @@ export const setIsLoadingCoins = (value: boolean) => (
     response: value
   }
 );
+
+export const setCoinsFiltered = (coins: Ticker[]) => (
+  { 
+    type: CoinActionTypes.SET_COINS_FILTERED,
+    response: coins
+  }
+);

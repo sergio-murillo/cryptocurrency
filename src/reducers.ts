@@ -3,9 +3,8 @@ import coinReducer, { CoinState } from 'src/store/coin/reducer';
 import exchangeReducer, { ExchangeState } from 'src/store/exchange/reducer';
 import marketReducer, { MarketState } from 'src/store/market/reducer';
 import uiReducer, { UIState } from 'src/store/ui/reducer';
-import { connectRouter } from 'connected-react-router';
+import { connectRouter, RouterState } from 'connected-react-router';
 import { History } from 'history';
-import { RouterState } from 'connected-react-router';
 
 export interface ApplicationState {
   coin: CoinState;

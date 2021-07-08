@@ -1,10 +1,12 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects';
-import { fetchGlobalCryptoData, fetchAllCoins } from 'src/services/crytocurrency';
+import { fetchGlobalCryptoData, fetchAllCoins, fetchSpecificCoin } from 'src/services/crytocurrency';
 
 import {
   fetchGlobalCryptoActions,
   fetchAllCoinsActions,
   setIsLoadingCoins,
+  setCoinsFiltered,
+  fetchSpecificCoinActions,
 } from './actions';
 import { CoinActionTypes } from 'src/constants/action-types';
 
@@ -27,6 +29,7 @@ function* fetchAllCoinsSaga({ request: { start, limit }}: any) {
     yield all([
       put(setIsLoadingCoins(false)),
       put(fetchAllCoinsActions.success(response)),
+      put(setCoinsFiltered(response.data)),
     ]);
   } catch(e) {
     yield all([
@@ -38,4 +41,17 @@ function* fetchAllCoinsSaga({ request: { start, limit }}: any) {
 
 export function* allCoinsSaga() {
   yield takeLatest(CoinActionTypes.REQUEST_ALL_COINS, fetchAllCoinsSaga);
+}
+
+function* fetchSpecificCoinSaga({ request }: any) {
+  try {
+    const response = yield call(() => fetchSpecificCoin(request));
+    yield put(fetchSpecificCoinActions.success(response));
+  } catch(e) {
+    yield put(fetchSpecificCoinActions.error(e));
+  }
+}
+
+export function* specificCoinSaga() {
+  yield takeLatest(CoinActionTypes.REQUEST_SPECIFIC_COIN, fetchSpecificCoinSaga);
 }

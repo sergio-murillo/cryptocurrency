@@ -46,6 +46,6 @@ export interface Ticker {
   msupply: string;
 }
 
-export interface Ui {
+export interface UiCoin {
   isLoadingCoins: boolean;
 }

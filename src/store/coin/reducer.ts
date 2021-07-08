@@ -3,19 +3,21 @@ import { CoinActionTypes } from 'src/constants/action-types';
 import {
   AllCoinsResponse,
   GlobalCryptoDataResponse,
-  Ticker, Ui } from 'src/models';
+  Ticker, UiCoin } from 'src/models';
 
 export interface CoinState {
   globalCryptoData: GlobalCryptoDataResponse[];
   coins: AllCoinsResponse;
+  coinsFiltered: Ticker[];
   currentCoin: Ticker[];
-  ui: Ui;
+  ui: UiCoin;
   errors: any;
 }
 
 const initialState: CoinState = {
   globalCryptoData: [],
   coins: {} as AllCoinsResponse,
+  coinsFiltered: [],
   currentCoin: [],
   ui: {
     isLoadingCoins: false
@@ -80,6 +82,13 @@ const coinReducer: Reducer<CoinState> = (state = initialState, action) => {
         ui: {
           isLoadingCoins: response
         }
+      };
+    }
+    case CoinActionTypes.SET_COINS_FILTERED: {
+      const { response } = action;
+      return {
+        ...state,
+        coinsFiltered: response
       };
     }
     default:

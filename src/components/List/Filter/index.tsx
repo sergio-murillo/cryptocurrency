@@ -32,7 +32,7 @@ const Filter: React.FC<Props> = ({ submitText, submitFilter }) => {
   useEffect(() => {
     sendFilters(filter);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [filter]);
   
   return (
     <FilterContainer>

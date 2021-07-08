@@ -8,3 +8,7 @@ export interface MarketResponse {
   volume_usd: number;
   time: number;
 }
+
+export interface UiMarket {
+  isLoadingMarket: boolean;
+}

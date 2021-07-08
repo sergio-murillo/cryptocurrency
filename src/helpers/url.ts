@@ -7,4 +7,5 @@ export const expandUrl = (url: string, template: any): string => {
   return urlParse.expand(template);
 };
 
-export const buildImageUrl = (coin: string): string => `${IMAGES_URL}/img/25x25/${coin.replace(/\s|[.]/g, '-')}.png`;
+export const buildImageUrl = (coin: string, path = '/img/25x25/', url = IMAGES_URL): string =>
+  `${url}${path}${coin?.replace(/\s|[.]/g, '-')}.png`;
