@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { Theme, withTheme } from '@emotion/react';
-import { flex } from '@styles/commons';
+import { flex } from 'src/styles/commons';
 
 export const CoinDetailContainer = styled.div`
   ${flex('center', 'column')}

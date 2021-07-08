@@ -1,8 +1,8 @@
 import { Reducer } from 'redux';
-import { ExchangeActionTypes } from '@constants/action-types';
+import { ExchangeActionTypes } from 'src/constants/action-types';
 import {
   AllExchangeResponse,
-  ExchangeResponse } from '../../models';
+  ExchangeResponse } from 'src/models';
 
 export interface ExchangeState {
   exchanges: AllExchangeResponse;

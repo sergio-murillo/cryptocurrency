@@ -1,7 +1,7 @@
 import React from 'react';
-import PanelContainer from '@components/Commons/Panel';
-import PercentageValue from '@components/Commons/PercentageValue';
-import { H1, H2 } from '@styles/commons';
+import PanelContainer from 'src/components/Commons/Panel';
+import PercentageValue from 'src/components/Commons/PercentageValue';
+import { H1, H2 } from 'src/styles/commons';
 import {
   CoinDetailContainer,
   CoinRank,

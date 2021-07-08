@@ -1,8 +1,17 @@
 import styled from '@emotion/styled';
-import Table from '@src/components/List/Table';
+import Table from 'src/components/List/Table';
 
 export const CoinListContainer = styled.div``;
 
 export const TableContainer = styled(Table)`
-  margin: 50px 0;
+  margin: 40px 0;
+
+  tbody > tr > td:nth-of-type(2) {
+    width: 25px;
+  }
+`;
+
+export const CoinImage = styled.img`
+  width: 25px;
+  height: 25px;
 `;

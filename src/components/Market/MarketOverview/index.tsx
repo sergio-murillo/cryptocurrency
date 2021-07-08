@@ -1,7 +1,7 @@
 import React from 'react';
-import PanelContainer from '@components/Commons/Panel';
+import PanelContainer from 'src/components/Commons/Panel';
 import { FaMoneyBillAlt, FaPercent } from 'react-icons/fa';
-import PercentageValue from '@components/Commons/PercentageValue';
+import PercentageValue from 'src/components/Commons/PercentageValue';
 import { MarketOverviewItems, MarketOverviewItem, MarketName, MarketValue } from './style';
 
 const MarketOverview: React.FC = () => (

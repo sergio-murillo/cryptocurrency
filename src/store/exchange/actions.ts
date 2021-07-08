@@ -1,6 +1,6 @@
-import { createAction } from '@helpers/action';
-import { ExchangeActionTypes } from '@constants/action-types';
-import { ExchangeResponse, AllExchangeResponse } from '../../models';
+import { createAction } from 'src/helpers/action';
+import { ExchangeActionTypes } from 'src/constants/action-types';
+import { ExchangeResponse, AllExchangeResponse } from 'src/models';
 
 export const fetchAllExchangesActions = createAction(
   ExchangeActionTypes.REQUEST_ALL_EXCHANGES,

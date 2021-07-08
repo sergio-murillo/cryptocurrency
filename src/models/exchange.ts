@@ -15,17 +15,27 @@ export interface AllExchangeResponse {
 }
 
 export interface ExchangeResponse {
-  '0': {
-    name: string;
-    date_live: string;
-    url: string;
-  };
-  pairs: Array<{
-    base: string;
-    quote: string;
-    volume: number;
-    price: number;
-    price_usd: number;
-    time: number;
-  }>;
+  data: ExchangePair[];
+  total_counts: number;
+}
+
+export interface ExchangeInfo {
+  name: string;
+  date_live: string;
+  url: string;
+}
+
+export interface ExchangePair {
+  base: string;
+  quote: string;
+  volume: number;
+  price: number;
+  price_usd: number;
+  time: number;
+}
+
+export interface ExchangeForCoinRequest {
+  id: number;
+  start: number;
+  limit: number;
 }

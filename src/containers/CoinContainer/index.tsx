@@ -1,10 +1,10 @@
 import React, { useEffect }  from 'react';
-import CoinList from '@components/Coin/CoinList';
-import MarketOverview from '@components/Market/MarketOverview';
+import CoinList from 'src/components/Coin/CoinList';
+import MarketOverview from 'src/components/Market/MarketOverview';
 import { connect } from 'react-redux';
-import { ApplicationState } from '../../reducers';
-import { GlobalCryptoDataResponse } from '@models/coin';
-import { fetchGlobalCryptoActions } from '@store/coin/actions';
+import { ApplicationState } from 'src/reducers';
+import { GlobalCryptoDataResponse } from 'src/models/coin';
+import { fetchGlobalCryptoActions } from 'src/store/coin/actions';
 import { CoinContainer, CoinMarketContainer, CoinListContainer } from './styles';
 
 interface propsFromState {
@@ -21,7 +21,8 @@ const Coin: React.FC<AllProps> = ({ globalCryptoData, fetchGlobalCrypto }) => {
 
   useEffect(() => {
     fetchGlobalCrypto();
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <CoinContainer>
@@ -36,8 +37,8 @@ const Coin: React.FC<AllProps> = ({ globalCryptoData, fetchGlobalCrypto }) => {
   );
 };
 
-const mapStateToProps = ({ coin }: ApplicationState) => ({
-  globalCryptoData: coin.globalCryptoData
+const mapStateToProps = ({ coin: { globalCryptoData } }: ApplicationState) => ({
+  globalCryptoData
 });
 
 const mapDispatchToProps = (dispatch) => {

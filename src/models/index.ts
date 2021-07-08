@@ -2,7 +2,7 @@ export type {
     GlobalCryptoDataResponse,
     AllCoinsResponse,
     AllCoinsRequest,
-    Ticker } from './coin';
+    Ticker, Ui } from './coin';
 
 export type { MarketResponse } from './market';
 

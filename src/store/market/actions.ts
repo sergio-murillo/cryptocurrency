@@ -1,5 +1,5 @@
-import { createAction } from '@helpers/action';
-import { MarketActionTypes } from '@constants/action-types';
+import { createAction } from 'src/helpers/action';
+import { MarketActionTypes } from 'src/constants/action-types';
 import { MarketResponse } from '../../models';
 
 export const fetchMarketForCoinActions = createAction(

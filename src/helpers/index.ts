@@ -1,2 +1,2 @@
-export { expandUrl } from './url';
+export { expandUrl, buildImageUrl } from './url';
 export { createAction } from './action';

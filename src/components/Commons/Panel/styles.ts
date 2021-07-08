@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { mq } from '@styles/commons';
+import { mq } from 'src/styles/commons';
 import { css, Theme, withTheme } from '@emotion/react';
 
 const stylePanel = (props: { theme: Theme }) => {

@@ -8,31 +8,43 @@ import {
   DropDownList,
   ListItem } from './styles';
 
-const options = [];
-const placeHolder = 'USD inicial';
+export interface DropdownItem {
+  id: string|number;
+  label: string;
+  value: string|number;
+}
 
-const DropDown: React.FC = () => {
+interface PropsFromComponent {
+  options: DropdownItem[];
+  placeholder: string;
+  submitOptionSelected: (item: DropdownItem) => void;
+}
+
+type Props = PropsFromComponent;
+
+const DropDown: React.FC<Props> = ({ options, placeholder, submitOptionSelected }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState('');
 
   const toggling = () => setIsOpen(!isOpen);
 
-  const onOptionClicked = value => () => {
-    setSelectedOption(value);
+  const onOptionClicked = (option: DropdownItem) => () => {
+    setSelectedOption(option.label);
+    submitOptionSelected(option);
     setIsOpen(false);
   };
 
   return (
     <DropDownContainer>
       <DropDownHeader onClick={toggling}>
-        {selectedOption || placeHolder} <FaAngleDown/>
+        {selectedOption || placeholder} <FaAngleDown/>
       </DropDownHeader>
       {isOpen && (
         <DropDownListContainer>
           <DropDownList>
             {options.map(option => (
-              <ListItem onClick={onOptionClicked(option)} key={Math.random()}>
-                {option}
+              <ListItem onClick={onOptionClicked(option)} key={option.value}>
+                {option.label}
               </ListItem>
             ))}
           </DropDownList>

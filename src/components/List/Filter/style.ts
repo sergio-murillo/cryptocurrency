@@ -1,4 +1,4 @@
-import { flex, mq } from '@styles/commons';
+import { flex, mq } from 'src/styles/commons';
 import { css, Theme, withTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 

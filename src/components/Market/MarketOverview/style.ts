@@ -1,4 +1,4 @@
-import { flex } from '@styles/commons';
+import { flex } from 'src/styles/commons';
 import styled from '@emotion/styled';
 
 export const MarketOverviewItems = styled.div`

@@ -19,10 +19,12 @@ export interface AllCoinsRequest {
 
 export interface AllCoinsResponse {
   data: Ticker[];
-  info: {
-    coins_num: number;
-    time: number;
-  };
+  info: Info;
+}
+
+export interface Info {
+  coins_num: number;
+  time: number;
 }
 
 export interface Ticker {
@@ -42,4 +44,8 @@ export interface Ticker {
   csupply: string;
   tsupply: string;
   msupply: string;
+}
+
+export interface Ui {
+  isLoadingCoins: boolean;
 }

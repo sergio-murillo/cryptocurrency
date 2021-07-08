@@ -1,5 +1,5 @@
 import React from 'react';
-import Loader from '@components/Commons/Loader';
+import Loader from 'src/components/Commons/Loader';
 import {
   TableContainer,
   TableHead,
@@ -12,13 +12,14 @@ import {
 interface PropsFromComponent {
   items: any[];
   headers: any[];
+  totalColumns: number;
   className?: any;
   isLoading?: boolean;
 }
 
 type Props = PropsFromComponent;
 
-const Table: React.FC<Props> = ({ headers, items, className, isLoading }) => {
+const Table: React.FC<Props> = ({ headers = [], items = [], className, isLoading, totalColumns }) => {
   return (
     <TableContainer className={className}>
       <TableHead>
@@ -32,10 +33,10 @@ const Table: React.FC<Props> = ({ headers, items, className, isLoading }) => {
         {
           isLoading &&
             <TableBodyRow>
-              <TableBodyColumn colSpan={headers.length}><Loader show={isLoading}/></TableBodyColumn>
+              <TableBodyColumn colSpan={totalColumns}><Loader show={isLoading}/></TableBodyColumn>
             </TableBodyRow>
         }
-        {items.map((row, index) => (
+        {items.map((row: any[], index) => (
             <TableBodyRow key={index}>
               {row.map((data, index) => (
                 <TableBodyColumn key={index}>{data}</TableBodyColumn>

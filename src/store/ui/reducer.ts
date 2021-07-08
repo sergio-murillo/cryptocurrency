@@ -1,5 +1,5 @@
 import { Reducer } from 'redux';
-import { MarketActionTypes } from '@constants/action-types';
+import { UIActionTypes } from 'src/constants/action-types';
 
 export interface UIState {
   isLoading: boolean;
@@ -11,7 +11,7 @@ const initialState: UIState = {
 
 const uiReducer: Reducer<UIState> = (state = initialState, action) => {
   switch (action.type) {
-    case MarketActionTypes.FETCH_MARKET_FOR_COIN: {
+    case UIActionTypes.SET_IS_LOADING: {
       const { response } = action;
       return {
         ...state,

@@ -1,6 +1,6 @@
 import React from 'react';
-import PanelContainer from '@components/Commons/Panel';
-import Table from '@components/List/Table';
+import PanelContainer from 'src/components/Commons/Panel';
+import Table from 'src/components/List/Table';
 
 const exchangeList = {
     headers: [{ title: 'Exchange' }, { title: 'Pair' }, { title: '24h Volume' }, { title: 'Price (USD)' }],
@@ -11,7 +11,7 @@ const exchangeList = {
 const Exchange: React.FC = () => {
   return (
     <PanelContainer>
-        <Table {...exchangeList}></Table>
+        <Table {...exchangeList} totalColumns={4}></Table>
     </PanelContainer>
   );
 };

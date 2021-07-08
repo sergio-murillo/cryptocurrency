@@ -1,14 +1,14 @@
 import { Reducer } from 'redux';
-import { MarketActionTypes } from '@constants/action-types';
-import { MarketResponse } from '../../models';
+import { MarketActionTypes } from 'src/constants/action-types';
+import { MarketResponse } from 'src/models';
 
 export interface MarketState {
-  market: MarketResponse;
+  market: MarketResponse[];
   errors: any;
 }
 
 const initialState: MarketState = {
-  market: {} as MarketResponse,
+  market: [],
   errors: {} as any
 };
 

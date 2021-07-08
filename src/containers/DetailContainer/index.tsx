@@ -1,8 +1,8 @@
 import React from 'react';
-import CoinDetail from '@components/Coin/CoinDetail';
-import Market from '@components/Market/MarketList';
-import Exchange from '@components/Exchange/ExchangeList';
+import Market from 'src/components/Market/MarketList';
+import Exchange from 'src/components/Exchange/ExchangeList';
 import { DetailContainer, DetailLists, DetailCoin, DetailTable } from './styles';
+import CoinDetail from 'src/components/Coin/CoinDetail';
 
 const Detail: React.FC = () => {
   return (

@@ -4,6 +4,13 @@
   "plugins": [
     "@typescript-eslint"
   ],
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [["src", "./src"]]
+      }
+    }
+  },
   "extends": [
     "react-app",
     "./node_modules/react-redux-typescript-scripts/eslint.js",

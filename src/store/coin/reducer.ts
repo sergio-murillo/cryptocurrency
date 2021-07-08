@@ -1,14 +1,15 @@
 import { Reducer } from 'redux';
-import { CoinActionTypes } from '@constants/action-types';
+import { CoinActionTypes } from 'src/constants/action-types';
 import {
   AllCoinsResponse,
   GlobalCryptoDataResponse,
-  Ticker } from '../../models';
+  Ticker, Ui } from 'src/models';
 
 export interface CoinState {
   globalCryptoData: GlobalCryptoDataResponse[];
   coins: AllCoinsResponse;
   currentCoin: Ticker[];
+  ui: Ui;
   errors: any;
 }
 
@@ -16,6 +17,9 @@ const initialState: CoinState = {
   globalCryptoData: [],
   coins: {} as AllCoinsResponse,
   currentCoin: [],
+  ui: {
+    isLoadingCoins: false
+  },
   errors: {} as any
 };
 
@@ -66,6 +70,15 @@ const coinReducer: Reducer<CoinState> = (state = initialState, action) => {
         ...state,
         errors: {
           currentCoin: error,
+        }
+      };
+    }
+    case CoinActionTypes.IS_LOADING_COINS: {
+      const { response } = action;
+      return {
+        ...state,
+        ui: {
+          isLoadingCoins: response
         }
       };
     }

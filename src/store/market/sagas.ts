@@ -1,8 +1,8 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { fetchMarketsForCoin } from '@services/crytocurrency';
+import { fetchMarketsForCoin } from 'src/services/crytocurrency';
 
 import {fetchMarketForCoinActions } from './actions';
-import { ExchangeActionTypes } from '@constants/action-types';
+import { ExchangeActionTypes } from 'src/constants/action-types';
 
 function* fetchMarketForCoinSaga({ id }: ReturnType<any>) {
   try {

@@ -1,25 +1,10 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { fetchAllExchanges, fetchExchangeForCoin } from '@services/crytocurrency';
+import { fetchExchangeForCoin } from 'src/services/crytocurrency';
 
 import {
-  fetchAllExchangesActions,
   fetchExchangeForCoinActions,
 } from './actions';
-import { ExchangeActionTypes } from '@constants/action-types';
-
-function* fetchAllExchangesSaga() {
-  try {
-    const response = yield call(() => fetchAllExchanges());
-    yield put(fetchAllExchangesActions.success(response));
-  } catch(e) {
-    yield put(fetchAllExchangesActions.error(e));
-  }
-  
-}
-
-export function* allExchangeSaga() {
-  yield takeLatest(ExchangeActionTypes.REQUEST_ALL_EXCHANGES, fetchAllExchangesSaga);
-}
+import { ExchangeActionTypes } from 'src/constants/action-types';
 
 function* fetchExchangeForCoinSaga({ id }: ReturnType<any>) {
   try {

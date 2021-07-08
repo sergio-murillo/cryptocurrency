@@ -9,7 +9,7 @@ export const CoinContainer = styled.div`
 `;
 
 export const CoinMarketContainer = styled.div`
-  width: 40%;
+  width: 30%;
   margin-top: 0;
   margin-left: 20px;
 
@@ -21,7 +21,7 @@ export const CoinMarketContainer = styled.div`
 `;
 
 export const CoinListContainer = styled.div`
-  width: 60%;
+  width: 70%;
   ${mq[0]} {
     width: 100%;
   }

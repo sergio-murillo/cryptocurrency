@@ -8,6 +8,7 @@ export enum CoinActionTypes {
   REQUEST_SPECIFIC_COIN = '@@coin/REQUEST_SPECIFIC_COIN',
   FETCH_SPECIFIC_COIN = '@@coin/FETCH_SPECIFIC_COIN',
   FETCH_SPECIFIC_COIN_ERROR = '@@coin/FETCH_SPECIFIC_COIN_ERROR',
+  IS_LOADING_COINS = '@@coin/IS_LOADING_COINS',
 }
 
 export enum MarketActionTypes {

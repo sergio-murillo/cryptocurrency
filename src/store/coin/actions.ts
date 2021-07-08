@@ -1,10 +1,10 @@
-import { createAction } from '@helpers/action';
-import { CoinActionTypes } from '@constants/action-types';
+import { createAction } from 'src/helpers/action';
+import { CoinActionTypes } from 'src/constants/action-types';
 import {
   GlobalCryptoDataResponse,
   AllCoinsRequest,
   AllCoinsResponse,
-  Ticker } from '../../models';
+  Ticker } from 'src/models';
 
 export const fetchGlobalCryptoActions = createAction(
   CoinActionTypes.REQUEST_GLOBAL_CRYPTO,
@@ -23,3 +23,10 @@ export const fetchSpecificCoinActions = createAction(
   CoinActionTypes.FETCH_SPECIFIC_COIN,
   CoinActionTypes.FETCH_SPECIFIC_COIN_ERROR
 )<number, Ticker[], any>();
+
+export const setIsLoadingCoins = (value: boolean) => (
+  { 
+    type: CoinActionTypes.IS_LOADING_COINS,
+    response: value
+  }
+);
