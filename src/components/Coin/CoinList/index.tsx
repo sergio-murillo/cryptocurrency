@@ -38,7 +38,8 @@ const CointList: React.FC<Props> = ({ coinsFiltered, coins, ui, fetchAllCoins, s
   const coinList = {
     ...COIN_LIST_TEMPLATE,
     items: getCoinItems(coinsFiltered),
-    isLoading: ui.isLoadingCoins
+    isLoading: ui.isLoadingCoins,
+    totalColumns: 9,
   };
 
   const requestCoins = (page: number) => {
@@ -54,7 +55,6 @@ const CointList: React.FC<Props> = ({ coinsFiltered, coins, ui, fetchAllCoins, s
           submitFilter={(filter) => filterPricePerPage(filter, coins.data, setCoinsFiltered)}></Filter>
         <TableContainer
           {...coinList}
-          totalColumns={9}
           actionRow={(index: number) => window.open(buildCoinUrl(coins.data[index].id))}></TableContainer>
         <Paginator
           totalCount={coins.info.coins_num}

@@ -12,7 +12,7 @@ import {
   CoinPercentagesContainer,
   CoinPercentageValue } from './styles';
 
-interface PropsFromComponent {
+export interface PropsFromComponent {
   currentCoin: Ticker;
 }
 

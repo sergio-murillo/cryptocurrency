@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 import Loader from 'src/components/Commons/Loader';
+import { Header } from 'src/models/commons';
 import {
   TableContainer,
   TableHead,
@@ -11,9 +12,9 @@ import {
 
 interface PropsFromComponent {
   items: any[];
-  headers: any[];
+  headers: Header[];
   totalColumns: number;
-  className?: any;
+  className?: string;
   isLoading?: boolean;
   actionRow: (row: number) => void;
 }
@@ -37,16 +38,25 @@ const Table: React.FC<Props> = ({ headers = [], items = [], className, isLoading
               <TableBodyColumn colSpan={totalColumns}><Loader show={isLoading}/></TableBodyColumn>
             </TableBodyRow>
         }
-        {items.map((row: any[], index) => (
-            <TableBodyRow key={index} onClick={() => actionRow(index)}>
-              {row.map((data, index) => (
-                <TableBodyColumn key={index}>{data}</TableBodyColumn>
-              ))}
-            </TableBodyRow>
-        ))}
+        {items.map((row, index) => (<RowMemoized row={row} actionRow={() => actionRow(index)} key={index}/>))}
       </TableBody>
     </TableContainer>
   );
+};
+
+const RowMemoized = ({ row, actionRow }: { row: any[], actionRow: () => void }) => {
+  const actionRowClick = useCallback(() => {
+    actionRow();
+  }, [actionRow]);
+
+  return useMemo(() => {
+      return (
+      <TableBodyRow onClick={() => actionRowClick()}>
+        {row.map((data, index) => (
+            <TableBodyColumn key={index}>{data}</TableBodyColumn>
+        ))}
+      </TableBodyRow>);
+  }, [row, actionRowClick]);
 };
 
 export default Table;
