@@ -1,17 +1,10 @@
 import React from 'react';
 import PanelContainer from 'src/components/Commons/Panel';
-import { IMAGES_C1_URL } from 'src/constants/commons';
+import { IMAGES_C1_URL, MARKET_LIST_TEMPLATE } from 'src/constants/commons';
 import { buildImageUrl } from 'src/helpers';
 import { MarketResponse } from 'src/models';
-import { Table } from 'src/models/commons';
 import { formatUSD } from 'src/utils';
 import { MarketImage, MarketName, TableContainer } from './styles';
-
-let marketList: Table = {
-  headers: [{ title: 'Market' }, { title: 'Pair' }, { title: 'Price (USD)' }, { title: 'Volume (USD)' }],
-  items: [],
-  isLoading: false,
-};
 
 interface PropsFromComponent {
   markets: MarketResponse[];
@@ -20,8 +13,8 @@ interface PropsFromComponent {
 type Props = PropsFromComponent;
 
 const Market: React.FC<Props> = ({ markets }) => {
-  marketList = {
-    ...marketList,
+  const marketList = {
+    ...MARKET_LIST_TEMPLATE,
     items: getMarketItems(markets)
   };
 
@@ -29,7 +22,8 @@ const Market: React.FC<Props> = ({ markets }) => {
     <PanelContainer title="Mercados">
       <TableContainer
         {...marketList}
-        totalColumns={marketList.headers.length}></TableContainer>
+        totalColumns={marketList.headers.length}
+        actionRow={(index: number) => console.info(markets[index])}></TableContainer>
     </PanelContainer>
   );
 };

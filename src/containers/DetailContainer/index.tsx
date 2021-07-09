@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import Market from 'src/components/Market/MarketList';
 import Exchange from 'src/components/Exchange/ExchangeList';
 import { DetailContainer, DetailLists, DetailCoin, DetailTable } from './styles';
@@ -25,12 +25,15 @@ type AllProps = propsFromState & propsFromDispatch;
 
 const Detail: React.FC<AllProps> = ({ market, currentCoin, router, fetchMarkets, fetchSpecificCoin }) => {
 
-  useEffect(() => {
+  const fetchInitialData = useCallback(() => {
     const coinId = +getId(router);
     fetchMarkets(coinId);
     fetchSpecificCoin(coinId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [router, fetchMarkets, fetchSpecificCoin]);
+
+  useEffect(() => {
+    fetchInitialData();
+  }, [fetchInitialData]);
 
   return (
     <DetailContainer>

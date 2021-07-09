@@ -1,4 +1,4 @@
-import React, { useEffect }  from 'react';
+import React, { useCallback, useEffect }  from 'react';
 import CoinList from 'src/components/Coin/CoinList';
 import MarketOverview from 'src/components/Market/MarketOverview';
 import { connect } from 'react-redux';
@@ -12,17 +12,20 @@ interface propsFromState {
 }
 
 interface propsFromDispatch {
-  fetchGlobalCrypto: () => any;
+  fetchGlobalCrypto: () => void;
 }
 
 type AllProps = propsFromState & propsFromDispatch;
 
 const Coin: React.FC<AllProps> = ({ globalCryptoData, fetchGlobalCrypto }) => {
 
-  useEffect(() => {
+  const fetchInitialData = useCallback(() => {
     fetchGlobalCrypto();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [fetchGlobalCrypto]);
+
+  useEffect(() => {
+    fetchInitialData();
+  }, [fetchInitialData]);
 
   return (
     <CoinContainer>

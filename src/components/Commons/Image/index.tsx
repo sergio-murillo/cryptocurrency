@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import { FaFileImage } from 'react-icons/fa';
 import { Image } from './styles';
 
@@ -28,4 +28,4 @@ const Loader: React.FC<Props> = ({ className, src, alt }) => {
   );
 };
 
-export default Loader;
+export default memo(Loader);

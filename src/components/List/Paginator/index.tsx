@@ -1,6 +1,7 @@
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import { usePagination, DOTS } from 'src/utils/pagination';
 import { PaginatorActionContainer, PaginatorContainer, PaginatorIcon, PaginatorNumber } from './styles';
+import { memo } from 'react';
 
 interface PropsFromComponent {
   onPageChange: (page: number|string) => void;
@@ -52,11 +53,16 @@ const Paginator: React.FC<Props> = (props: Props) => {
   }
 
   const onNext = () => {
-    onPageChange(currentPage + 1);
+    const lastPage = paginationRange[paginationRange.length - 1];
+    if (currentPage !== lastPage) {
+      onPageChange(currentPage + 1);
+    }
   };
 
   const onPrevious = () => {
-    onPageChange(currentPage - 1);
+    if (currentPage !== 1) {
+      onPageChange(currentPage - 1);
+    }
   };
 
   return (
@@ -84,4 +90,4 @@ const Paginator: React.FC<Props> = (props: Props) => {
   );
 };
 
-export default Paginator;
+export default memo(Paginator);

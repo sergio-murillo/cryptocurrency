@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import PanelContainer from 'src/components/Commons/Panel';
 import Paginator from 'src/components/List/Paginator';
 import TableContainer from 'src/components/List/Table';
-import { EXCHANGES_LIMIT_PER_PAGE } from 'src/constants/commons';
-import { Table } from 'src/models/commons';
+import { EXCHANGES_LIMIT_PER_PAGE, EXCHANGE_LIST_TEMPLATE } from 'src/constants/commons';
 import { ExchangeForCoinRequest, ExchangePair, ExchangeResponse, UiExchange } from 'src/models/exchange';
 import { ApplicationState } from 'src/reducers';
 import { fetchExchangeForCoinActions, setIsLoadingExchanges } from 'src/store/exchange/actions';
@@ -25,23 +24,16 @@ interface PropsFromDispatch {
 
 type Props = propsFromComponent & PropsFromState & PropsFromDispatch;
 
-let exchangeList: Table = {
-    headers: [{ title: 'Base' }, { title: 'Quote' }, { title: 'Price (USD)' }],
-    items: [],
-    isLoading: false,
-  };
-
 const ExchangeList: React.FC<Props> = ({ coinId, currentExchange, ui, fetchExchangeForCoin }) => {
 
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     fetchExchangeForCoin({ id: coinId, start: 1, limit: EXCHANGES_LIMIT_PER_PAGE });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [fetchExchangeForCoin, coinId]);
   
-  exchangeList = {
-    ...exchangeList,
+  const exchangeList = {
+    ...EXCHANGE_LIST_TEMPLATE,
     items: getExchangeItems(currentExchange.data),
     isLoading: ui.isLoadingExchanges
   };
@@ -59,7 +51,8 @@ const ExchangeList: React.FC<Props> = ({ coinId, currentExchange, ui, fetchExcha
     <PanelContainer title="Cambio a USD">
         <TableContainer
           {...exchangeList}
-          totalColumns={exchangeList.headers.length}></TableContainer>
+          totalColumns={exchangeList.headers.length}
+          actionRow={(index: number) => console.info(currentExchange.data[index])}></TableContainer>
         <Paginator
           totalCount={currentExchange.total_counts}
           currentPage={currentPage}

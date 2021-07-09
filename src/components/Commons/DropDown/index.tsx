@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { FaAngleDown } from 'react-icons/fa';
 import {
   DropDownContainer,
@@ -54,4 +54,4 @@ const DropDown: React.FC<Props> = ({ options, placeholder, submitOptionSelected 
   );
 };
 
-export default DropDown;
+export default memo(DropDown);

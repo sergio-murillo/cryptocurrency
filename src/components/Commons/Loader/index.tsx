@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { FaSpinner } from 'react-icons/fa';
 import { LoaderContainer } from './styles';
 
@@ -16,4 +16,4 @@ const Loader: React.FC<Props> = ({ show }) => (
    </LoaderContainer>
 );
 
-export default Loader;
+export default memo(Loader);

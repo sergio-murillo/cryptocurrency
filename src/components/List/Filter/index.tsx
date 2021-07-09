@@ -21,17 +21,13 @@ const Filter: React.FC<Props> = ({ submitText, submitFilter }) => {
 
   const [showError, setShowError] = useState(false);
 
-  const sendFilters = (filter: { firstFilter: string, secondFilter: string }) => {
+  useEffect(() => {
     if (checkIsValidFilter(filter)) {
       submitFilter(filter);
     } else {
       setShowError(true);
     }
-  };
-
-  useEffect(() => {
-    sendFilters(filter);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter]);
   
   return (

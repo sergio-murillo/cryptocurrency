@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { useTheme } from '@emotion/react';
 import { PercentageValueType } from './styles';
@@ -25,4 +25,4 @@ const PercentageValue: React.FC<Props> = ({ value }) => {
   );
 };
 
-export default PercentageValue;
+export default memo(PercentageValue);

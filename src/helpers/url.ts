@@ -9,3 +9,5 @@ export const expandUrl = (url: string, template: any): string => {
 
 export const buildImageUrl = (coin: string, path = '/img/25x25/', url = IMAGES_URL): string =>
   `${url}${path}${coin?.replace(/\s|[.]/g, '-')}.png`;
+
+export const buildCoinUrl = (coinId: string) => `${window.location.origin}/crypto-currency/${coinId}`;

@@ -21,3 +21,7 @@ export const MarketName = styled.div`
 `;
 
 export const MarketValue = styled.div``;
+
+export const iconsStyle = (): React.CSSProperties => ({
+  marginRight: '10px',
+});

@@ -18,17 +18,20 @@ interface PropsFromComponent {
 
 type Props = PropsFromComponent;
 
-const CoinDetail: React.FC<Props> = ({ currentCoin }) => {
+const CoinDetail: React.FC<Props> = ({ currentCoin: { rank, nameid, symbol, name, price_usd, percent_change_1h } }) => {
   return (
     <PanelContainer>
       <CoinDetailContainer>
-        <CoinRank>Rank: {currentCoin.rank}</CoinRank>
-        <CoinIcon src={buildImageUrl(currentCoin.nameid, '/img/')}/>
-        <H1>{currentCoin.name} ({currentCoin.symbol})</H1>
-        <H1>{formatUSD(+currentCoin.price_usd)}</H1>
+        <CoinRank>Clasificación: {rank}</CoinRank>
+        <CoinIcon
+          src={buildImageUrl(nameid, '/img/')}/>
+        <H1>{name} ({symbol})</H1>
+        <H1>{formatUSD(+price_usd)}</H1>
         <CoinPercentagesContainer>
             <H2>1h</H2>
-            <CoinPercentageValue><PercentageValue value={+currentCoin.percent_change_1h}/></CoinPercentageValue>
+            <CoinPercentageValue>
+              <PercentageValue value={+percent_change_1h}/>
+            </CoinPercentageValue>
         </CoinPercentagesContainer>
       </CoinDetailContainer>
     </PanelContainer>

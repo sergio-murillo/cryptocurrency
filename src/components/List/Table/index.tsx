@@ -15,11 +15,12 @@ interface PropsFromComponent {
   totalColumns: number;
   className?: any;
   isLoading?: boolean;
+  actionRow: (row: number) => void;
 }
 
 type Props = PropsFromComponent;
 
-const Table: React.FC<Props> = ({ headers = [], items = [], className, isLoading, totalColumns }) => {
+const Table: React.FC<Props> = ({ headers = [], items = [], className, isLoading, totalColumns, actionRow }) => {
   return (
     <TableContainer className={className}>
       <TableHead>
@@ -37,7 +38,7 @@ const Table: React.FC<Props> = ({ headers = [], items = [], className, isLoading
             </TableBodyRow>
         }
         {items.map((row: any[], index) => (
-            <TableBodyRow key={index}>
+            <TableBodyRow key={index} onClick={() => actionRow(index)}>
               {row.map((data, index) => (
                 <TableBodyColumn key={index}>{data}</TableBodyColumn>
               ))}

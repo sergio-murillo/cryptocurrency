@@ -9,10 +9,10 @@ import { buildImageUrl } from 'src/helpers';
 import { formatUSD } from 'src/utils';
 import { connect } from 'react-redux';
 import { fetchAllCoinsActions, setCoinsFiltered, setIsLoadingCoins } from 'src/store/coin/actions';
-import { LIMIT_PER_PAGE } from 'src/constants/commons';
+import { LIMIT_PER_PAGE, COIN_LIST_TEMPLATE } from 'src/constants/commons';
 import { ApplicationState } from 'src/reducers';
-import { normalizeText } from 'src/utils/common';
-import { Table } from 'src/models/commons';
+import { buildCoinUrl } from 'src/helpers/url';
+import { filterPricePerPage, filterTextPerPage } from 'src/utils/common';
 
 interface propsFromState {
   coins: AllCoinsResponse;
@@ -21,31 +21,22 @@ interface propsFromState {
 }
 
 interface propsFromDispatch {
-  fetchAllCoins: (request: AllCoinsRequest) => any;
-  setCoins: (coins: Ticker[]) => any;
+  fetchAllCoins: (request: AllCoinsRequest) => void;
+  setCoinsFiltered: (coins: Ticker[]) => void;
 }
 
 type Props = propsFromState & propsFromDispatch;
 
-let coinList: Table = {
-  headers: [{ title: 'Ranking' }, { title: 'Coin', colspan: 2 }, { title: 'Price (USD)' }, { title: '% 1h' }, { title: '% 24h' },
-    { title: '% 7d' }, { title: 'Market Cap' }, { title: '24h Volume'}
-  ],
-  items: [],
-  isLoading: true,
-};
-
-const CointList: React.FC<Props> = ({ coinsFiltered, coins, ui, fetchAllCoins, setCoins }) => {
+const CointList: React.FC<Props> = ({ coinsFiltered, coins, ui, fetchAllCoins, setCoinsFiltered }) => {
 
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     fetchAllCoins({ start: 1, limit: LIMIT_PER_PAGE });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [fetchAllCoins]);
 
-  coinList = {
-    ...coinList,
+  const coinList = {
+    ...COIN_LIST_TEMPLATE,
     items: getCoinItems(coinsFiltered),
     isLoading: ui.isLoadingCoins
   };
@@ -55,37 +46,16 @@ const CointList: React.FC<Props> = ({ coinsFiltered, coins, ui, fetchAllCoins, s
     setCurrentPage(page);
   };
 
-  const filterTextPerPage = (text: string) => {
-    const coinsFiltered = coins.data.filter(({ name }) => normalizeText(name).includes(normalizeText(text)));
-
-    setCoins(coinsFiltered);
-  };
-
-  const filterPricePerPage = ({ firstFilter, secondFilter }) => {
-    const filterCondition = (price: number): boolean => {
-      if (!firstFilter) {
-        return price <= secondFilter;
-      }
-
-      if (!secondFilter) {
-        return price >= firstFilter;
-      }
-
-      return price >= firstFilter && price <= secondFilter;
-    };
-
-    const coinsFiltered = coins.data.filter(({ price_usd }) => filterCondition(+price_usd));
-
-    setCoins(coinsFiltered);
-  };
-
   return (
     <CoinListContainer>
       <PanelContainer>
         <Filter
-          submitText={(text) => filterTextPerPage(text)}
-          submitFilter={(filter) => filterPricePerPage(filter)}></Filter>
-        <TableContainer {...coinList} totalColumns={9}></TableContainer>
+          submitText={(text) => filterTextPerPage(coins.data, text, setCoinsFiltered)}
+          submitFilter={(filter) => filterPricePerPage(filter, coins.data, setCoinsFiltered)}></Filter>
+        <TableContainer
+          {...coinList}
+          totalColumns={9}
+          actionRow={(index: number) => window.open(buildCoinUrl(coins.data[index].id))}></TableContainer>
         <Paginator
           totalCount={coins.info.coins_num}
           currentPage={currentPage}
@@ -122,7 +92,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(fetchAllCoinsActions.request(request));
       dispatch(setIsLoadingCoins(true));
     },
-    setCoins: (coins: Ticker[]) => {
+    setCoinsFiltered: (coins: Ticker[]) => {
       dispatch(setCoinsFiltered(coins));
     }
   };
