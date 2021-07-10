@@ -14,18 +14,18 @@ import { ApplicationState } from 'src/reducers';
 import { buildCoinUrl } from 'src/helpers/url';
 import { filterPricePerPage, filterTextPerPage } from 'src/utils/common';
 
-interface propsFromState {
+interface PropsFromState {
   coins: AllCoinsResponse;
   coinsFiltered: Ticker[];
   ui: UiCoin;
 }
 
-interface propsFromDispatch {
+interface PropsFromDispatch {
   fetchAllCoins: (request: AllCoinsRequest) => void;
   setCoinsFiltered: (coins: Ticker[]) => void;
 }
 
-type Props = propsFromState & propsFromDispatch;
+export type Props = PropsFromState & PropsFromDispatch;
 
 const CointList: React.FC<Props> = ({ coinsFiltered, coins, ui, fetchAllCoins, setCoinsFiltered }) => {
 
@@ -51,7 +51,7 @@ const CointList: React.FC<Props> = ({ coinsFiltered, coins, ui, fetchAllCoins, s
     <CoinListContainer>
       <PanelContainer>
         <Filter
-          submitText={(text) => filterTextPerPage(coins.data, text, setCoinsFiltered)}
+          submitText={(text) => setCoinsFiltered(filterTextPerPage(coins.data, text))}
           submitFilter={(filter) => filterPricePerPage(filter, coins.data, setCoinsFiltered)}></Filter>
         <TableContainer
           {...coinList}

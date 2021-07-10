@@ -10,21 +10,21 @@ interface PropsFromComponent {
   globalData: GlobalCryptoDataResponse;
 }
 
-type Props = PropsFromComponent;
+export type Props = PropsFromComponent;
 
 const MarketOverview: React.FC<Props> = ({ globalData: { total_mcap, mcap_change, total_volume, volume_change, avg_change_percent } }) => (
   <PanelContainer>
-    <MarketOverviewItems>
-      <MarketOverviewItem>
-        <MarketName><FaMoneyBillAlt style={iconsStyle()}/> Market Cap</MarketName>
+    <MarketOverviewItems data-testid="market-overview-items">
+      <MarketOverviewItem data-testid="market-item-mcap">
+        <MarketName><FaMoneyBillAlt style={iconsStyle()}/> Mercado Capital</MarketName>
         <MarketValue>{formatUSD(total_mcap)} ({<PercentageValue value={+mcap_change}/>})</MarketValue>
       </MarketOverviewItem>
-      <MarketOverviewItem>
-        <MarketName><FaMoneyBillAlt style={iconsStyle()}/> 24h Volume</MarketName>
+      <MarketOverviewItem data-testid="market-item-volume">
+        <MarketName><FaMoneyBillAlt style={iconsStyle()}/> Acumulado 24h</MarketName>
         <MarketValue>{formatUSD(total_volume)} ({<PercentageValue value={+volume_change}/>})</MarketValue>
       </MarketOverviewItem>
-      <MarketOverviewItem>
-        <MarketName><FaPercent style={iconsStyle()}/> AVG Price Change</MarketName>
+      <MarketOverviewItem data-testid="market-item-change-price">
+        <MarketName><FaPercent style={iconsStyle()}/> % de Cambio</MarketName>
         <MarketValue>{<PercentageValue value={+avg_change_percent}/>}</MarketValue>
       </MarketOverviewItem>
     </MarketOverviewItems>

@@ -7,17 +7,17 @@ import { GlobalCryptoDataResponse } from 'src/models/coin';
 import { fetchGlobalCryptoActions } from 'src/store/coin/actions';
 import { CoinContainer, CoinMarketContainer, CoinListContainer } from './styles';
 
-interface propsFromState {
+interface PropsFromState {
   globalCryptoData: GlobalCryptoDataResponse[];
 }
 
-interface propsFromDispatch {
+interface PropsFromState {
   fetchGlobalCrypto: () => void;
 }
 
-type AllProps = propsFromState & propsFromDispatch;
+export type Props = PropsFromState & PropsFromState;
 
-const Coin: React.FC<AllProps> = ({ globalCryptoData, fetchGlobalCrypto }) => {
+const Coin: React.FC<Props> = ({ globalCryptoData, fetchGlobalCrypto }) => {
 
   const fetchInitialData = useCallback(() => {
     fetchGlobalCrypto();

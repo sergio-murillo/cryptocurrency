@@ -66,7 +66,7 @@ const Paginator: React.FC<Props> = (props: Props) => {
   };
 
   return (
-    <PaginatorContainer>
+    <PaginatorContainer data-testid="paginator-container">
       <PaginatorActionContainer onClick={onPrevious}>
         <PaginatorAction action={PaginatorActionOptions.back}/>
       </PaginatorActionContainer>

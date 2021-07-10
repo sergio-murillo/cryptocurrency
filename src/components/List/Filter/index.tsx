@@ -33,6 +33,7 @@ const Filter: React.FC<Props> = ({ submitText, submitFilter }) => {
   return (
     <FilterContainer>
       <FilterInput
+        data-testid="filter-input"
         type="text"
         placeholder="Filtrar por nombre"
         onChange={(e) => submitText(e.target.value)}/>

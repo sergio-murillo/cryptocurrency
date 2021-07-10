@@ -10,7 +10,7 @@ interface PropsFromComponent {
   markets: MarketResponse[];
 }
 
-type Props = PropsFromComponent;
+export type Props = PropsFromComponent;
 
 const Market: React.FC<Props> = ({ markets }) => {
   const marketList = {

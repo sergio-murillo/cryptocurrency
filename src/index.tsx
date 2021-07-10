@@ -47,7 +47,7 @@ const initialState: ApplicationState = {
 
 const history = createBrowserHistory();
 
-const store = configureStore(initialState, history);
+export const store = configureStore(initialState, history);
 
 ReactDOM.render(
   <Root store={store} history={history}/>,

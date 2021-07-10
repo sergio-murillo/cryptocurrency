@@ -20,7 +20,7 @@ interface PropsFromComponent {
   submitOptionSelected: (item: DropdownItem) => void;
 }
 
-type Props = PropsFromComponent;
+export type Props = PropsFromComponent;
 
 const DropDown: React.FC<Props> = ({ options, placeholder, submitOptionSelected }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,14 +36,14 @@ const DropDown: React.FC<Props> = ({ options, placeholder, submitOptionSelected 
 
   return (
     <DropDownContainer>
-      <DropDownHeader onClick={toggling}>
+      <DropDownHeader data-testid="dropdown-header" onClick={toggling}>
         {selectedOption || placeholder} <FaAngleDown/>
       </DropDownHeader>
       {isOpen && (
         <DropDownListContainer>
-          <DropDownList>
+          <DropDownList data-testid="dropdown-list">
             {options.map(option => (
-              <ListItem onClick={onOptionClicked(option)} key={option.value}>
+              <ListItem onClick={onOptionClicked(option)} key={option.id}>
                 {option.label}
               </ListItem>
             ))}

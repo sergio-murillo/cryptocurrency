@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
-import Market from 'src/components/Market/MarketList';
-import Exchange from 'src/components/Exchange/ExchangeList';
+import MarketList from 'src/components/Market/MarketList';
+import ExchangeList from 'src/components/Exchange/ExchangeList';
 import { DetailContainer, DetailLists, DetailCoin, DetailTable } from './styles';
 import CoinDetail from 'src/components/Coin/CoinDetail';
 import { ApplicationState } from 'src/reducers';
@@ -10,20 +10,20 @@ import { fetchSpecificCoinActions } from 'src/store/coin/actions';
 import { MarketResponse, Ticker } from 'src/models';
 import { RouterState } from 'connected-react-router';
 
-interface propsFromState {
+interface PropsFromState {
   market: MarketResponse[];
   currentCoin: Ticker[];
   router?: RouterState;
 }
 
-interface propsFromDispatch {
+interface PropsFromDispatch {
   fetchMarkets: (id: number) => any;
   fetchSpecificCoin: (id: number) => any;
 }
 
-type AllProps = propsFromState & propsFromDispatch;
+export type Props = PropsFromState & PropsFromDispatch;
 
-const Detail: React.FC<AllProps> = ({ market, currentCoin, router, fetchMarkets, fetchSpecificCoin }) => {
+const Detail: React.FC<Props> = ({ market, currentCoin, router, fetchMarkets, fetchSpecificCoin }) => {
 
   const fetchInitialData = useCallback(() => {
     const coinId = +getId(router);
@@ -40,11 +40,11 @@ const Detail: React.FC<AllProps> = ({ market, currentCoin, router, fetchMarkets,
       <DetailCoin>
         <CoinDetail currentCoin={currentCoin[0] || {}}/>
         <DetailTable>
-          <Exchange coinId={+getId(router)}/>
+          <ExchangeList coinId={+getId(router)}/>
         </DetailTable>
       </DetailCoin>
       <DetailLists>
-        <Market markets={market}/>
+        <MarketList markets={market}/>
       </DetailLists>
     </DetailContainer>
   );

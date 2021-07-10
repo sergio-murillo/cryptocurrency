@@ -6,10 +6,10 @@ interface PropsFromComponent {
   show: boolean;
 }
 
-type Props = PropsFromComponent;
+export type Props = PropsFromComponent;
 
 const Loader: React.FC<Props> = ({ show }) => (
-   <LoaderContainer>
+   <LoaderContainer data-testid="loader-container">
      {
        show && <FaSpinner className="loader"/>
      }

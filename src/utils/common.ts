@@ -2,10 +2,12 @@ import { Ticker } from 'src/models';
 
 export const normalizeText = (text: string) => text.toLocaleLowerCase();
 
-export const filterTextPerPage = (data: Ticker[], text: string, setCoinsFiltered: (coins: Ticker[]) => void) => {
-  const coinsFiltered = data.filter(({ name }) => normalizeText(name).includes(normalizeText(text)));
+export const getRandomArbitrary = (min: number, max: number) => {
+  return Math.random() * (max - min) + min;
+};
 
-  setCoinsFiltered(coinsFiltered);
+export const filterTextPerPage = (data: Ticker[], text: string) => {
+  return data.filter(({ name }) => normalizeText(name).includes(normalizeText(text)));
 };
 
 export const filterPricePerPage = ({ firstFilter, secondFilter }, data: Ticker[], setCoinsFiltered: (coins: Ticker[]) => void) => {

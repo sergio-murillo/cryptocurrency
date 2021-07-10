@@ -8,9 +8,10 @@ import { History } from 'history';
 import { Global, ThemeProvider } from '@emotion/react';
 import customTheme from '../themes/default';
 import { globalStyles } from 'src/styles/commons';
+import { ApplicationState } from 'src/reducers';
 
 interface MainProps {
-  store: Store<any>;
+  store: Store<ApplicationState>;
   history: History;
 }
 

@@ -12,22 +12,22 @@ import {
   CoinPercentagesContainer,
   CoinPercentageValue } from './styles';
 
-export interface PropsFromComponent {
+interface PropsFromComponent {
   currentCoin: Ticker;
 }
 
-type Props = PropsFromComponent;
+export type Props = PropsFromComponent;
 
 const CoinDetail: React.FC<Props> = ({ currentCoin: { rank, nameid, symbol, name, price_usd, percent_change_1h } }) => {
   return (
     <PanelContainer>
       <CoinDetailContainer>
-        <CoinRank>Clasificación: {rank}</CoinRank>
+        <CoinRank data-testid="coin-rank">Clasificación: {rank}</CoinRank>
         <CoinIcon
           src={buildImageUrl(nameid, '/img/')}/>
         <H1>{name} ({symbol})</H1>
         <H1>{formatUSD(+price_usd)}</H1>
-        <CoinPercentagesContainer>
+        <CoinPercentagesContainer data-testid="coin-percentages-container">
             <H2>1h</H2>
             <CoinPercentageValue>
               <PercentageValue value={+percent_change_1h}/>

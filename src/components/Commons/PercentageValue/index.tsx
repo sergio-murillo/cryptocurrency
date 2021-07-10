@@ -7,7 +7,7 @@ interface PropsFromComponent {
   value: number;
 }
 
-type Props = PropsFromComponent;
+export type Props = PropsFromComponent;
 
 const PercentageValue: React.FC<Props> = ({ value }) => {
   const theme = useTheme();
@@ -15,14 +15,17 @@ const PercentageValue: React.FC<Props> = ({ value }) => {
   if (value > 0) {
     return (
       <PercentageValueType
+        data-testid="percentage-value"
         color={theme.colors.green}><FaChevronUp />{value}%</PercentageValueType>
       );
   }
 
   return (
     <PercentageValueType
+      data-testid="percentage-value"
       color={theme.colors.red}><FaChevronDown />{value}%</PercentageValueType>
   );
 };
+
 
 export default memo(PercentageValue);

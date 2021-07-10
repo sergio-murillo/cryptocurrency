@@ -22,7 +22,7 @@ interface PropsFromDispatch {
   fetchExchangeForCoin: (request: ExchangeForCoinRequest, total?: number) => any;
 }
 
-type Props = propsFromComponent & PropsFromState & PropsFromDispatch;
+export type Props = propsFromComponent & PropsFromState & PropsFromDispatch;
 
 const ExchangeList: React.FC<Props> = ({ coinId, currentExchange, ui, fetchExchangeForCoin }) => {
 

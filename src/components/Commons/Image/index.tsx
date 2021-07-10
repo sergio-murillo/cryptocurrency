@@ -8,7 +8,7 @@ interface PropsFromComponent {
   className?: string;
 }
 
-type Props = PropsFromComponent;
+export type Props = PropsFromComponent;
 
 const Loader: React.FC<Props> = ({ className, src, alt }) => {
   const [error, setError] = useState(false);
@@ -21,10 +21,11 @@ const Loader: React.FC<Props> = ({ className, src, alt }) => {
 
   return (
     <Image
-     className={className}
-     onError={() => setError(true)}
-     src={src}
-     alt={alt} />
+      data-testid="image"
+      className={className}
+      onError={() => setError(true)}
+      src={src}
+      alt={alt} />
   );
 };
 

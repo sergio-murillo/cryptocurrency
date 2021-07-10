@@ -23,15 +23,15 @@ type Props = PropsFromComponent;
 
 const Table: React.FC<Props> = ({ headers = [], items = [], className, isLoading, totalColumns, actionRow }) => {
   return (
-    <TableContainer className={className}>
-      <TableHead>
+    <TableContainer data-testid="table-container" className={className}>
+      <TableHead data-testid="table-header">
         <TableHeadRow>
           {headers.map(({ title, colspan }, index) => (
               <TableHeadColumn colSpan={colspan || 1} key={index}>{title}</TableHeadColumn>
           ))}
         </TableHeadRow>
       </TableHead>
-      <TableBody>
+      <TableBody data-testid="table-body">
         {
           isLoading &&
             <TableBodyRow>
