@@ -13,7 +13,7 @@ export interface ExchangeState {
   errors: any;
 }
 
-const initialState: ExchangeState = {
+export const initialState: ExchangeState = {
   exchanges: {} as AllExchangeResponse,
   currentExchange: {} as ExchangeResponse,
   exchangesFiltered: [],

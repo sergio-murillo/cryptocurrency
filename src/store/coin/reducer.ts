@@ -14,7 +14,7 @@ export interface CoinState {
   errors: any;
 }
 
-const initialState: CoinState = {
+export const initialState: CoinState = {
   globalCryptoData: [],
   coins: {} as AllCoinsResponse,
   coinsFiltered: [],

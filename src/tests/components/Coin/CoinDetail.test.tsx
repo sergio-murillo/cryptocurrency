@@ -1,10 +1,10 @@
 import CoinDetail, { Props } from '../../../components/Coin/CoinDetail';
 import { render, cleanup, screen, RenderResult  } from '@testing-library/react';
-import { ThemeProvider } from '@emotion/react';
 import customTheme from '../../../themes/default';
 import '../../../extends/global';
 import '@testing-library/jest-dom/extend-expect';
 import { CoinMock } from '../../factory/coins';
+import { WrapperTemplate } from '../../utils';
 
 const factory = (props: Partial<Props> = {}) => {
   const defaultProps: Props = {
@@ -12,9 +12,9 @@ const factory = (props: Partial<Props> = {}) => {
   };
   
   return (
-  <ThemeProvider theme={customTheme}>
+  <WrapperTemplate>
     <CoinDetail {...defaultProps} {...props}/>
-  </ThemeProvider>
+  </WrapperTemplate>
   );
 };
 

@@ -9,7 +9,7 @@ export interface MarketState {
   errors: any;
 }
 
-const initialState: MarketState = {
+export const initialState: MarketState = {
   market: [],
   ui: {
     isLoadingMarket: false
