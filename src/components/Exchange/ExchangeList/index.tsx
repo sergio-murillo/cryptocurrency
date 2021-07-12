@@ -1,30 +1,56 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, FC } from 'react';
 import { connect } from 'react-redux';
 import PanelContainer from 'src/components/Commons/Panel';
-import Paginator from 'src/components/List/Paginator';
-import TableContainer from 'src/components/List/Table';
+import Paginator from 'src/components/Commons/List/Paginator';
+import TableContainer from 'src/components/Commons/List/Table';
 import { EXCHANGES_LIMIT_PER_PAGE, EXCHANGE_LIST_TEMPLATE } from 'src/constants/commons';
 import { ExchangeForCoinRequest, ExchangePair, ExchangeResponse, UiExchange } from 'src/models/exchange';
 import { ApplicationState } from 'src/reducers';
 import { fetchExchangeForCoinActions, setIsLoadingExchanges } from 'src/store/exchange/actions';
 import { formatUSD } from 'src/utils';
 
+/**
+ * Properties from component
+ */
 interface propsFromComponent {
+  /**
+   * Coin Id
+   * @type {number}
+   */
   coinId: number;
 }
 
+/**
+ * Properties from state
+ */
 interface PropsFromState {
+  /**
+   * exchange obtained by coin id
+   * @type {ExchangeResponse}
+   */
   currentExchange: ExchangeResponse;
+  /**
+   * UI status
+   * @type {UiExchange}
+   */
   ui: UiExchange;
 }
 
 interface PropsFromDispatch {
+  /**
+   * Called when the component is initialized to get the exchanges
+   * @param {ExchangeForCoinRequest} request Request to get the exchanges
+   * @param {number} total Total count of exchanges
+   */
   fetchExchangeForCoin: (request: ExchangeForCoinRequest, total?: number) => any;
 }
 
 export type Props = propsFromComponent & PropsFromState & PropsFromDispatch;
 
-const ExchangeList: React.FC<Props> = ({ coinId, currentExchange, ui, fetchExchangeForCoin }) => {
+/**
+ * Exchange list
+ */
+export const ExchangeList: FC<Props> = ({ coinId, currentExchange, ui, fetchExchangeForCoin }) => {
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -62,6 +88,11 @@ const ExchangeList: React.FC<Props> = ({ coinId, currentExchange, ui, fetchExcha
   );
 };
 
+/**
+ * @private
+ * @param exchanges Exchange list
+ * @returns Exchange list transformed
+ */
 const getExchangeItems = (exchanges: ExchangePair[]) => (
   exchanges.map(exchange => [
     exchange.base,

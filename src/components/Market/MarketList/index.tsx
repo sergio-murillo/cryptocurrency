@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import PanelContainer from 'src/components/Commons/Panel';
 import { IMAGES_C1_URL, MARKET_LIST_TEMPLATE } from 'src/constants/commons';
 import { buildImageUrl } from 'src/helpers';
@@ -6,13 +6,23 @@ import { MarketResponse } from 'src/models';
 import { formatUSD } from 'src/utils';
 import { MarketImage, MarketName, TableContainer } from './styles';
 
+/**
+ * Properties from component
+ */
 interface PropsFromComponent {
+  /**
+   * Market list
+   * @type {MarketResponse[]}
+   */
   markets: MarketResponse[];
 }
 
 export type Props = PropsFromComponent;
 
-const Market: React.FC<Props> = ({ markets }) => {
+/**
+ * Market list
+ */
+export const Market: FC<Props> = ({ markets }) => {
   const marketList = {
     ...MARKET_LIST_TEMPLATE,
     items: getMarketItems(markets)
@@ -28,8 +38,13 @@ const Market: React.FC<Props> = ({ markets }) => {
   );
 };
 
+/**
+ * @private
+ * @param markets Market list
+ * @returns Market list transformed
+ */
 const getMarketItems = (markets: MarketResponse[]) => (
-  markets.map(market => [
+  (markets || []).map(market => [
     <MarketName>
       <MarketImage
         src={buildImageUrl(market.name.toLocaleLowerCase(), '/img/exchanges/25x25/', IMAGES_C1_URL)}

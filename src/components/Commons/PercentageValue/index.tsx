@@ -1,15 +1,25 @@
-import React, { memo } from 'react';
+import { memo, FC } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { useTheme } from '@emotion/react';
 import { PercentageValueType } from './styles';
 
+/**
+ * Properties from component
+ */
 interface PropsFromComponent {
+  /**
+   * Percentaje value
+   * @type {number}
+   */
   value: number;
 }
 
 export type Props = PropsFromComponent;
 
-const PercentageValue: React.FC<Props> = ({ value }) => {
+/**
+ * Show positive or negative percentage
+ */
+export const PercentageValue: FC<Props> = ({ value }) => {
   const theme = useTheme();
 
   if (value > 0) {

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect }  from 'react';
+import { useCallback, useEffect, FC }  from 'react';
 import CoinList from 'src/components/Coin/CoinList';
 import MarketOverview from 'src/components/Market/MarketOverview';
 import { connect } from 'react-redux';
@@ -7,17 +7,33 @@ import { GlobalCryptoDataResponse } from 'src/models/coin';
 import { fetchGlobalCryptoActions } from 'src/store/coin/actions';
 import { CoinContainer, CoinMarketContainer, CoinListContainer } from './styles';
 
+/**
+ * Properties from state
+ */
 interface PropsFromState {
+  /**
+   * Global cryptocurrency data
+   * @type {GlobalCryptoDataResponse[]}
+   */
   globalCryptoData: GlobalCryptoDataResponse[];
 }
 
-interface PropsFromState {
+/**
+ * Properties from dispatcher
+ */
+interface PropsFromDispatch {
+   /**
+   * Called when the component is initialized to get global data
+   */
   fetchGlobalCrypto: () => void;
 }
 
-export type Props = PropsFromState & PropsFromState;
+export type Props = PropsFromState & PropsFromDispatch;
 
-const Coin: React.FC<Props> = ({ globalCryptoData, fetchGlobalCrypto }) => {
+/**
+ * Container to display cryptocurrency list and global market summary
+ */
+export const Coin: FC<Props> = ({ globalCryptoData, fetchGlobalCrypto }) => {
 
   const fetchInitialData = useCallback(() => {
     fetchGlobalCrypto();

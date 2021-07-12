@@ -10,13 +10,14 @@
     "jsx": "react-jsx",
     "paths": {
       "src/*": ["src/*"]
-    }
+    },
+    "noEmit": false
   },
   "include": [
-    "src"
+    "src",
+    "tests"
   ],
   "exclude": [
-    "node_modules",
-    "src/tests"
+    "node_modules"
   ]
 }

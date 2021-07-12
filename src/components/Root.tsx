@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import { Provider } from 'react-redux';
 import { Store } from 'redux';
 import '../assets/sass/main.sass';
@@ -10,12 +10,27 @@ import customTheme from '../themes/default';
 import { globalStyles } from 'src/styles/commons';
 import { ApplicationState } from 'src/reducers';
 
+/**
+ * Properties to initialize application state
+ */
 interface MainProps {
+  /**
+   * Application store
+   * @type {Store<ApplicationState>}
+   */
   store: Store<ApplicationState>;
+  /**
+   * Location history
+   * @type {History}
+   */
   history: History;
 }
 
-const Root: React.FC<MainProps> = ({ store, history }) => (
+
+/**
+ * Main component
+ */
+const Root: FC<MainProps> = ({ store, history }) => (
   <Provider store={store}>
     <ThemeProvider theme={customTheme}>
       <Global

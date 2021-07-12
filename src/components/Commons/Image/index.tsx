@@ -1,16 +1,35 @@
-import React, { memo, useState } from 'react';
+import { memo, useState, FC } from 'react';
 import { FaFileImage } from 'react-icons/fa';
-import { Image } from './styles';
+import { ImageContainer } from './styles';
 
+/**
+ * Properties from component
+ */
 interface PropsFromComponent {
+  /**
+   * Image path
+   * @type {string}
+   */
   src: string;
+  /**
+   * Image alt text
+   * @type {string}
+   */
   alt: string;
+  /**
+   * Image classname
+   * @type {string}
+   * @ignore
+   */
   className?: string;
 }
 
 export type Props = PropsFromComponent;
 
-const Loader: React.FC<Props> = ({ className, src, alt }) => {
+/**
+ * Generic image to use fallbacks
+ */
+export const Image: FC<Props> = ({ className, src, alt }) => {
   const [error, setError] = useState(false);
 
   if (error) {
@@ -20,7 +39,7 @@ const Loader: React.FC<Props> = ({ className, src, alt }) => {
   }
 
   return (
-    <Image
+    <ImageContainer
       data-testid="image"
       className={className}
       onError={() => setError(true)}
@@ -29,4 +48,4 @@ const Loader: React.FC<Props> = ({ className, src, alt }) => {
   );
 };
 
-export default memo(Loader);
+export default memo(Image);

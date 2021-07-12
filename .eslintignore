@@ -4,4 +4,5 @@ webpack.dev.config.js
 server.js
 craco.config.js
 jest.config.js
-src/tests
+tests
+styleguide.config.js

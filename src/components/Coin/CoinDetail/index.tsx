@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import PanelContainer from 'src/components/Commons/Panel';
 import PercentageValue from 'src/components/Commons/PercentageValue';
 import { buildImageUrl } from 'src/helpers';
@@ -12,13 +12,23 @@ import {
   CoinPercentagesContainer,
   CoinPercentageValue } from './styles';
 
+/**
+ * Properties from component
+ */
 interface PropsFromComponent {
+  /**
+   * Current cryptocurrency
+   * @type {Ticker}
+   */
   currentCoin: Ticker;
 }
 
 export type Props = PropsFromComponent;
 
-const CoinDetail: React.FC<Props> = ({ currentCoin: { rank, nameid, symbol, name, price_usd, percent_change_1h } }) => {
+/**
+ * Detailed summary of a cryptocurrency
+ */
+ export const CoinDetail: FC<Props> = ({ currentCoin: { rank, nameid, symbol, name, price_usd, percent_change_1h } }) => {
   return (
     <PanelContainer>
       <CoinDetailContainer>
@@ -37,6 +47,5 @@ const CoinDetail: React.FC<Props> = ({ currentCoin: { rank, nameid, symbol, name
     </PanelContainer>
   );
 };
-
 
 export default CoinDetail;

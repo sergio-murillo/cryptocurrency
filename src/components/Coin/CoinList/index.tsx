@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import Paginator from 'src/components/List/Paginator';
-import Filter from 'src/components/List/Filter';
+import { useEffect, useState, FC } from 'react';
+import Paginator from 'src/components/Commons/List/Paginator';
+import Filter from 'src/components/Commons/List/Filter';
 import PanelContainer from 'src/components/Commons/Panel';
 import PercentageValue from 'src/components/Commons/PercentageValue';
 import { CoinImage, CoinListContainer, TableContainer } from './styles';
@@ -14,20 +14,49 @@ import { ApplicationState } from 'src/reducers';
 import { buildCoinUrl } from 'src/helpers/url';
 import { filterPricePerPage, filterTextPerPage } from 'src/utils/common';
 
+/**
+ * Properties from state
+ */
 interface PropsFromState {
+  /**
+   * coins obtained from API
+   * @type {AllCoinsResponse}
+   */
   coins: AllCoinsResponse;
+  /**
+   * User filtered coins
+   * @type {Ticker[]}
+   */
   coinsFiltered: Ticker[];
+  /**
+   * UI status
+   * @type {UiCoin}
+   */
   ui: UiCoin;
 }
 
+/**
+ * Properties from dispatcher
+ */
 interface PropsFromDispatch {
+  /**
+   * Called when the component is initialized to get the coins
+   * @param {AllCoinsRequest} request Request to get the coins
+   */
   fetchAllCoins: (request: AllCoinsRequest) => void;
+  /**
+   * Called when types from input text to filter currencies
+   * @param {Array.<Ticker>} coins List of filtered coins
+   */
   setCoinsFiltered: (coins: Ticker[]) => void;
 }
 
 export type Props = PropsFromState & PropsFromDispatch;
 
-const CointList: React.FC<Props> = ({ coinsFiltered, coins, ui, fetchAllCoins, setCoinsFiltered }) => {
+/**
+ * Cryptocurrency list
+ */
+export const CointList: FC<Props> = ({ coinsFiltered, coins, ui, fetchAllCoins, setCoinsFiltered }) => {
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -66,6 +95,11 @@ const CointList: React.FC<Props> = ({ coinsFiltered, coins, ui, fetchAllCoins, s
   );
 };
 
+/**
+ * @private
+ * @param coins Coin list
+ * @returns Coin list transformed
+ */
 const getCoinItems = (coins: Ticker[]) => (
   coins.map(coin => [
     coin.rank,

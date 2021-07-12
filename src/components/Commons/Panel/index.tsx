@@ -1,14 +1,24 @@
-import React from 'react';
+import { FC } from 'react';
 import { H3 } from 'src/styles/commons';
 import { PanelContainer } from './styles';
 
+/**
+ * Properties from component
+ */
 interface PropsFromComponent {
+  /**
+   * Panel title
+   * @type {string}
+   */
   title?: string;
 }
 
 export type Props = PropsFromComponent;
 
-const Panel: React.FC<Props> = ({ children, title }) => (
+/**
+ * Generic panel to display information on card
+ */
+export const Panel: FC<Props> = ({ children, title }) => (
   <PanelContainer>
     {title && <H3>{title}</H3>}
     {children}

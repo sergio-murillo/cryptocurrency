@@ -1,3 +1,3 @@
 import styled from '@emotion/styled';
 
-export const Image = styled.img``;
+export const ImageContainer = styled.img``;

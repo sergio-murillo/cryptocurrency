@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import Table from 'src/components/List/Table';
+import Table from 'src/components/Commons/List/Table';
 import Image from 'src/components/Commons/Image';
 
 export const CoinListContainer = styled.div``;

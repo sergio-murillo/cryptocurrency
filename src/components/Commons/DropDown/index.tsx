@@ -1,5 +1,5 @@
 
-import { useState, memo } from 'react';
+import { useState, memo, FC } from 'react';
 import { FaAngleDown } from 'react-icons/fa';
 import {
   DropDownContainer,
@@ -8,21 +8,54 @@ import {
   DropDownList,
   ListItem } from './styles';
 
+/**
+ * Dropdown item properties
+ */
 export interface DropdownItem {
+  /**
+   * Item id
+   * @type {(string|number)}
+   */
   id: string|number;
+  /**
+   * Item label
+   * @type {string}
+   */
   label: string;
+  /**
+   * Item value
+   * @type {(string|number)}
+   */
   value: string|number;
 }
 
+/**
+ * Properties from component
+ */
 interface PropsFromComponent {
+  /**
+   * Dropdown options
+   * @type {DropdownItem[]}
+   */
   options: DropdownItem[];
+  /**
+   * Dropdown placeholder text
+   * @type {string}
+   */
   placeholder: string;
+  /**
+   * Called when a option is clicked
+   * @param {DropdownItem} item Option selected
+   */
   submitOptionSelected: (item: DropdownItem) => void;
 }
 
 export type Props = PropsFromComponent;
 
-const DropDown: React.FC<Props> = ({ options, placeholder, submitOptionSelected }) => {
+/**
+ * Generic dropdown
+ */
+export const DropDown: FC<Props> = ({ options, placeholder, submitOptionSelected }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState('');
 

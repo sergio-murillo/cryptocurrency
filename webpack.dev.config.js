@@ -20,12 +20,15 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin()
   ],
   resolve: {
-    extensions: ['', '.js', '.ts', '.tsx', '.jsx']
+    alias: {
+      "src": path.resolve(__dirname, 'src/')
+    },
+    extensions: ['*', '.js', '.ts', '.tsx', '.jsx']
   },
   module: {
-    loaders: [
+    rules: [
       {
-        test: /\.s[ac]ss$/i,
+        test: /\.(css|scss|sass)$/,
         use: [
           "style-loader",
           "css-loader",
@@ -33,17 +36,13 @@ module.exports = {
         ],
       },
       {
-        test: /\.tsx?$/,
-        loaders: ['react-hot', 'babel'],
-        include: path.join(__dirname, 'src'),
-        exclude: [/\.spec\.ts/]
+        test: /\.(ts|tsx)$/,
+        exclude: /node_modules/,
+        use: ["ts-loader"],
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
-        loaders: [
-          'file?hash=sha512&digest=hex&name=[hash].[ext]',
-          'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
-        ]
+        loaders: ["file-loader"]
       }
     ]
   }
