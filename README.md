@@ -19,8 +19,8 @@ In the application, 3 domains were identified: Coin, Market and Exchanges. For e
 
 ## Directory structure
 
--public (Contains public files)
--src (Contains source code)
+- public (Contains public files)
+- src (Contains source code)
  - components (Contains the application components)
  - constants (Contains constants)
  - containers(Contains the container components)
@@ -34,7 +34,7 @@ In the application, 3 domains were identified: Coin, Market and Exchanges. For e
  - styles (Contains application styles)
  - themes (contains the application themes)
  - utils (contains utils)
--tests (Contains unit tests)
+- tests (Contains unit tests)
 
 ## How to run
 
