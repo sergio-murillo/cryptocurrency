@@ -3,7 +3,7 @@ This project allows you to list and view cryptocurrencies
 
 ## Requirements
 
-- node (>= 10.5.0)
+- node (>= 12.13.1)
 - typescript (>= 4.3.4)
 
 ## Architecture
