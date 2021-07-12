@@ -36,5 +36,7 @@ module.exports = {
 
   //Ignore specific paths
   modulePathIgnorePatterns: ["<rootDir>/tests/utils.ts"],
+
+  //Add emotion jest serializer
   snapshotSerializers: [ '@emotion/jest/serializer' ]
 };

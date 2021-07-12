@@ -2,20 +2,22 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { getPath } from './constants/router-paths';
 import MainLayout from './layouts/Main';
-import CoinContainer from './containers/CoinContainer';
-import DetailContainer from './containers/DetailContainer';
+import loadable from '@loadable/component';
+
+const CoinContainerLoadable = loadable(() => import('./containers/CoinContainer'));
+const DetailContainerLoadable = loadable(() => import('./containers/DetailContainer'));
 
 const Routes: React.FC = () => (
   <Switch>
     <RouteWrapper
       exact
-      component={CoinContainer}
+      component={CoinContainerLoadable}
       layout={MainLayout}
       path={getPath('home')}
     />
     <RouteWrapper
       exact
-      component={DetailContainer}
+      component={DetailContainerLoadable}
       layout={MainLayout}
       path={getPath('detail', ':coinId')}
     />

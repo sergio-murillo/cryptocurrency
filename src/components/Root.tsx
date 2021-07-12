@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Provider } from 'react-redux';
 import { Store } from 'redux';
-import '../assets/sass/main.sass';
+import '../styles/sass/main.sass';
 import Routes from '../routes';
 import { ConnectedRouter } from 'connected-react-router';
 import { History } from 'history';

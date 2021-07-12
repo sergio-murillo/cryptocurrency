@@ -1,24 +1,19 @@
 const path = require('path')
 const webpack = require('webpack')
 
-const BUILD_DIR = path.resolve(__dirname, 'dist')
+const BUILD_DIR = path.resolve(__dirname, 'build')
 
 module.exports = {
   devtool: 'eval',
-  entry: [
-    'babel-polyfill',
-    'webpack-dev-server/client?http://localhost:3000',
-    'webpack/hot/only-dev-server',
-    './src/index.tsx'
-  ],
+  entry: {
+    bundle: ['./src/index.tsx']
+  },
+  context: path.resolve(__dirname),
   output: {
     path: BUILD_DIR,
     filename: 'bundle.js',
     publicPath: '/'
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ],
   resolve: {
     alias: {
       "src": path.resolve(__dirname, 'src/')
@@ -38,7 +33,14 @@ module.exports = {
       {
         test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
-        use: ["ts-loader"],
+        use: [
+          {
+            loader: "ts-loader",
+            options: {
+              configFile: "tsconfig.styleguidist.json"
+            }
+          }
+        ]
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,

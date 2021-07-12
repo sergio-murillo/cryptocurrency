@@ -26,14 +26,14 @@ export const PercentageValue: FC<Props> = ({ value }) => {
     return (
       <PercentageValueType
         data-testid="percentage-value"
-        color={theme.colors.green}><FaChevronUp />{value}%</PercentageValueType>
+        color={theme.colors.green}><FaChevronUp />{value || 0}%</PercentageValueType>
       );
   }
 
   return (
     <PercentageValueType
       data-testid="percentage-value"
-      color={theme.colors.red}><FaChevronDown />{value}%</PercentageValueType>
+      color={theme.colors.red}><FaChevronDown />{value || 0}%</PercentageValueType>
   );
 };
 
