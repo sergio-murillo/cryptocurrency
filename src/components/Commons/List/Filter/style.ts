@@ -10,15 +10,28 @@ const styleBorderContainer = (props: { theme: Theme }) => {
   `;
 };
 
+const styleFilterError = (props: { theme: Theme }) => {
+  const { theme } = props;
+  
+  return css`
+    font-size: ${theme.fontSizes.xs};
+    font-weight: ${theme.fontWeights.semibold};
+    color: ${theme.colors.red};
+  `;
+};
+
 export const FilterContainer = withTheme(styled.div`
-  ${styleBorderContainer}
+${styleBorderContainer}
+`);
+
+export const FilterForm = styled.div`
   ${flex('flex-start', 'row', 'space-between')}
   padding-bottom: 15px;
   ${mq[0]} {
     flex-direction: column;
     align-items: center;
   }
-`);
+`;
 
 export const FilterInput = styled.input`
   width: auto;
@@ -30,6 +43,13 @@ export const FilterInput = styled.input`
 export const FilterDropdown = styled.div`
   ${flex('stretch', 'row')}
   ${mq[0]} {
+    width: 100%;
     flex-direction: column;
   }
 `;
+
+export const FilterError = withTheme(styled.div`
+  ${styleFilterError}
+  text-align: right;
+  padding-right: 15px;
+`);

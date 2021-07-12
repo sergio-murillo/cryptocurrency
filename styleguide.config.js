@@ -44,7 +44,12 @@ module.exports = {
         {
           test: /\.(ts|tsx)$/,
           exclude: /node_modules/,
-          use: ["ts-loader"],
+          use: [{
+            loader: "ts-loader",
+            options: {
+              configFile: "tsconfig.styleguidist.json"
+            }
+          }]
         },
         {
           test: /\.(jpe?g|png|gif|svg)$/i,

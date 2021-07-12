@@ -39,7 +39,7 @@ export const MarketOverview: FC<Props> = ({ globalData: { total_mcap, mcap_chang
         <MarketValue>{formatUSD(total_volume)} ({<PercentageValue value={+volume_change}/>})</MarketValue>
       </MarketOverviewItem>
       <MarketOverviewItem data-testid="market-item-change-price">
-        <MarketName><FaPercent style={iconsStyle()}/> % de Cambio</MarketName>
+        <MarketName><FaPercent style={iconsStyle()}/> de Cambio</MarketName>
         <MarketValue>{<PercentageValue value={+avg_change_percent}/>}</MarketValue>
       </MarketOverviewItem>
     </MarketOverviewItems>

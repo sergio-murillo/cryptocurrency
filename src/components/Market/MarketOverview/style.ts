@@ -20,7 +20,9 @@ export const MarketName = styled.div`
   font-weight: 600;
 `;
 
-export const MarketValue = styled.div``;
+export const MarketValue = styled.div`
+  max-width: 50%;
+`;
 
 export const iconsStyle = (): React.CSSProperties => ({
   marginRight: '10px',

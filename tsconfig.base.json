@@ -10,8 +10,7 @@
     "jsx": "react-jsx",
     "paths": {
       "src/*": ["src/*"]
-    },
-    "noEmit": false
+    }
   },
   "include": [
     "src",

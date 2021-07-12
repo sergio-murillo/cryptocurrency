@@ -1,7 +1,7 @@
 import { useEffect, useState, FC } from 'react';
 import Dropdown from 'src/components/Commons/DropDown';
 import { PRICE_FILTER_OPTIONS } from 'src/constants/commons';
-import { FilterContainer, FilterInput, FilterDropdown } from './style';
+import { FilterContainer, FilterInput, FilterDropdown, FilterError, FilterForm } from './style';
 
 /**
  * Filter range
@@ -54,6 +54,7 @@ export const Filter: FC<Props> = ({ submitText, submitFilter }) => {
   useEffect(() => {
     if (checkIsValidFilter(filter)) {
       submitFilter(filter);
+      setShowError(false);
     } else {
       setShowError(true);
     }
@@ -62,22 +63,24 @@ export const Filter: FC<Props> = ({ submitText, submitFilter }) => {
   
   return (
     <FilterContainer>
-      <FilterInput
-        data-testid="filter-input"
-        type="text"
-        placeholder="Filtrar por nombre"
-        onChange={(e) => submitText(e.target.value)}/>
-      <FilterDropdown>
-        <Dropdown
-          options={priceOptions}
-          placeholder="Precio inicial"
-          submitOptionSelected={(option) => setFilter((before) => ({ ...before, firstFilter: option.value.toString() }))}/>
-        <Dropdown
-          options={priceOptions}
-          placeholder="Precio final"
-          submitOptionSelected={(option) => setFilter((before) => ({ ...before, secondFilter: option.value.toString() }))}/>
-      </FilterDropdown>
-      { showError && <span>Error</span> }
+      <FilterForm>
+        <FilterInput
+          data-testid="filter-input"
+          type="text"
+          placeholder="Filtrar por nombre"
+          onChange={(e) => submitText(e.target.value)}/>
+        <FilterDropdown>
+          <Dropdown
+            options={priceOptions}
+            placeholder="Precio inicial"
+            submitOptionSelected={(option) => setFilter((before) => ({ ...before, firstFilter: option.value.toString() }))}/>
+          <Dropdown
+            options={priceOptions}
+            placeholder="Precio final"
+            submitOptionSelected={(option) => setFilter((before) => ({ ...before, secondFilter: option.value.toString() }))}/>
+        </FilterDropdown>
+      </FilterForm>
+      { showError && <FilterError>Error en el rango</FilterError> }
     </FilterContainer>
   );
 };
