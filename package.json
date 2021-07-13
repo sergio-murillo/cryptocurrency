@@ -8,7 +8,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "styleguidist": "styleguidist server --config styleguide.config.js",
-    "styleguidist:build": "styleguidist build --config styleguide.config.js"
+    "styleguidist:build": "styleguidist build --config styleguide.config.js",
+    "lint": "eslint src/**/*.{js,ts,tsx} --quiet --fix"
   },
   "author": "Sergio Murillo",
   "devDependencies": {

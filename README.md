@@ -73,3 +73,7 @@ Builds the app for production to the `build` folder.<br>
 ### `npm run styleguidist`
 
 View component documentation<br>
+
+### `npm run lint`
+
+Detect and fix code from linter<br>
