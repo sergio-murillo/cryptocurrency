@@ -8,21 +8,23 @@ const CoinContainerLoadable = loadable(() => import('./containers/CoinContainer'
 const DetailContainerLoadable = loadable(() => import('./containers/DetailContainer'));
 
 const Routes: React.FC = () => (
-  <Switch>
-    <RouteWrapper
-      exact
-      component={CoinContainerLoadable}
-      layout={MainLayout}
-      path={getPath('home')}
-    />
-    <RouteWrapper
-      exact
-      component={DetailContainerLoadable}
-      layout={MainLayout}
-      path={getPath('detail', ':coinId')}
-    />
-    <Route render={() => <div>Page not found!</div>} />
-  </Switch>
+  <React.StrictMode>
+    <Switch>
+      <RouteWrapper
+        exact
+        component={CoinContainerLoadable}
+        layout={MainLayout}
+        path={getPath('home')}
+      />
+      <RouteWrapper
+        exact
+        component={DetailContainerLoadable}
+        layout={MainLayout}
+        path={getPath('detail', ':coinId')}
+      />
+      <Route render={() => <div>Page not found!</div>} />
+    </Switch>
+  </React.StrictMode>
 );
 
 const RouteWrapper = ({
